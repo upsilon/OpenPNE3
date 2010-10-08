@@ -23,3 +23,16 @@ data/config/*
 web/cache/*
 config/config.OpenPNE2.php
 data/*.lck
+
+# deb package
+debian/files
+debian/*.substvars
+debian/*.debhelper.log
+debian/openpne3/
+debian/openpne3-skin-basic/
+debian/openpne3-skin-classic/
+debian/symfony/
+debian/symfony-plugins-formextra/
+debian/symfony-plugins-imagehandler/
+debian/symfony-plugins-protoculous/
+debian/symfony-plugins-templatingview/

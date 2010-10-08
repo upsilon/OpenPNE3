@@ -1,0 +1,2 @@
+bin/* usr/bin
+config data i18n lib symfony apps templates web usr/share/openpne3

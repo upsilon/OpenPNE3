@@ -1,0 +1,35 @@
+#!/usr/bin/make -f
+
+install:
+	dh_testdir
+	dh_testroot
+	dh_install -Xtest/
+	dh_installdirs
+	dh_installcron
+	dh_installdocs
+	dh_installchangelogs
+	dh_installdeb
+	rm -rf \
+		debian/openpne3/usr/share/openpne3-plugins/sfProtoculousPlugin/web/js/* \
+		debian/openpne3/usr/share/openpne3/web/js/tiny_mce
+	mkdir -p debian/openpne3/etc/apache2/sites-available
+	cp debian/conf/apache.conf debian/openpne3/etc/apache2/sites-available/openpne3
+	mv debian/openpne3/usr/share/openpne3/config/OpenPNE.yml.sample debian/openpne3/etc/openpne3/OpenPNE.yml
+	mv debian/openpne3/usr/share/openpne3/config/ProjectConfiguration.class.php.sample debian/openpne3/etc/openpne3/ProjectConfiguration.class.php
+	touch debian/openpne3/etc/openpne3/databases.yml
+	dh_link
+	dh_gencontrol
+	dh_md5sums
+	dh_builddeb
+
+clean: 
+	dh_testdir
+	dh_clean
+
+build:
+
+binary-indep: build install
+binary-arch: build install
+binary: binary-indep binary-arch
+
+.PHONY: build clean binary-indep binary-arch binary install

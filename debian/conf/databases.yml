@@ -1,0 +1,11 @@
+<?php require('/etc/openpne3/config-db.php') ?>
+
+all:
+  doctrine:
+    class: sfDoctrineDatabase
+    param:
+      dsn: <?php echo $dsn ?>
+      username: <?php echo $dbuser ?>
+      password: <?php echo $dbpass ?>
+      encoding: utf8
+

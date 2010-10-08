@@ -1,0 +1,4 @@
+etc/openpne3/OpenPNE.yml usr/lib/openpne3/config/OpenPNE.yml
+etc/openpne3/databases.yml usr/lib/openpne3/config/databases.yml
+etc/openpne3/ProjectConfiguration.class.php usr/lib/openpne3/config/ProjectConfiguration.class.php
+usr/share/tinymce/www usr/lib/openpne3/web/js/tiny_mce

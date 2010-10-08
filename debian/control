@@ -1,0 +1,75 @@
+Source: openpne3
+Section: web
+Priority: optional
+Maintainer: Kimura Youichi <kim.upsilon@bucyou.net>
+Build-Depends: debhelper (>= 7)
+Standards-Version: 3.8.0
+Homepage: http://www.openpne.jp/
+Vcs-Git: git://github.com/upsilon/OpenPNE3.git
+Vcs-Browser: http://github.com/upsilon/OpenPNE3
+
+Package: openpne3
+Architecture: all
+Depends: ${misc:Depends},
+  apache2 | httpd-cgi,
+  php5 (>= 5.2.3), php5-cli, php5-gd, php5-mysql | php5-pgsql | php5-sqlite,
+  symfony,
+  symfony-plugins-formextra,
+  symfony-plugins-imagehandler,
+  symfony-plugins-protoculous,
+  symfony-plugins-templatingview,
+  tinymce,
+  openpne3-auth-mailaddress | openpne3-auth,
+  openpne3-skin-basic | openpne3-skin
+Recommends: php5-mcrypt, php-apc,
+  mysql-server (>= 5.1) | postgresql,
+  openpne3-communitytopic,
+  openpne3-diary,
+  openpne3-message
+Suggests: openpne3-album,
+  openpne3-ashiato,
+  openpne3-blog,
+  openpne3-opensocial,
+  openpne3-webapi
+Description: a social network platform
+
+Package: openpne3-skin-basic
+Architecture: all
+Depends: ${misc:Depends}, openpne3
+Provides: openpne3-skin
+Description: a social network platform (skin)
+
+Package: openpne3-skin-classic
+Architecture: all
+Depends: ${misc:Depends}, openpne3
+Provides: openpne3-skin
+Description: a social network platform (skin)
+
+Package: symfony
+Architecture: all
+Depends: ${misc:Depends}
+Conflicts: php5-symfony1.0
+Replaces: php5-symfony1.0
+Homepage: http://www.symfony-project.org/
+Description: Open-Source PHP Web Framework
+
+Package: symfony-plugins-formextra
+Architecture: all
+Depends: ${misc:Depends}, symfony
+Description: plugin for symfony -- sfFormExtraPlugin
+
+Package: symfony-plugins-imagehandler
+Architecture: all
+Depends: ${misc:Depends}, symfony
+Description: plugin for symfony -- sfImageHandlerPlugin
+
+Package: symfony-plugins-protoculous
+Architecture: all
+Depends: ${misc:Depends}, symfony, libjs-prototype, libjs-scriptaculous
+Description: plugin for symfony -- sfProtoculousPlugin
+
+Package: symfony-plugins-templatingview
+Architecture: all
+Depends: ${misc:Depends}, symfony
+Description: plugin for symfony -- sfSymfonyTemplatingViewPlugin
+
