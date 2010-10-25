@@ -818,7 +818,12 @@ function op_decoration($string, $is_strip = false, $is_use_stylesheet = null, $i
     }
   }
 
-  return opWidgetFormRichTextareaOpenPNE::toHtml($string, $is_strip, $is_use_stylesheet, $is_html_tag_followup);
+  $html = opWidgetFormRichTextareaOpenPNE::toHtml($string, $is_strip, $is_use_stylesheet, $is_html_tag_followup);
+
+  $event = sfContext::getInstance()->getEventDispatcher()->filter(new sfEvent(null, 'op_decoration.filter_string'), $html);
+  $html = $event->getReturnValue();
+
+  return $html;
 }
 
 function op_is_accessable_url($uri)
