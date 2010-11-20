@@ -1,0 +1,8 @@
+profileSuccess:
+  customize:
+    introFriendLink:
+      template: [introfriend, introFriendLink]
+      parts: [menu]
+      is_component: true
+      target: [bottom] 
+

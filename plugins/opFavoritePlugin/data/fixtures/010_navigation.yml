@@ -1,0 +1,30 @@
+Navigation:
+  favorite_navigation_list:
+    type: "default"
+    uri: "favorite/list"
+    sort_order: 19
+    Translation:
+      ja_JP:
+        caption: "お気に入り"
+      en:
+        caption: "Favorite"
+
+  favorite_navigation_add:
+    type: "friend"
+    uri: "favorite/add"
+    sort_order: 21
+    Translation:
+      ja_JP:
+        caption: "お気に入りに追加"
+      en:
+        caption: "Add to favorite"
+
+  mobile_home_side_navigation_favorite_list:
+    type: "mobile_home_side"
+    uri: "favorite/list"
+    sort_order: 25
+    Translation:
+      ja_JP:
+        caption: "お気に入り"
+      en:
+        caption: "Favorite"

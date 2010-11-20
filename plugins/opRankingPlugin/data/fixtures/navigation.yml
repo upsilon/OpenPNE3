@@ -1,0 +1,20 @@
+Navigation:
+  secure_global_navigation_ranking:
+    type: "secure_global"
+    uri: "@ranking"
+    sort_order: 23
+    Translation:
+      ja_JP:
+        caption: "ランキング"
+      en:
+        caption: "Ranking"
+
+  mobile_home_side_navigation_ranking_access:
+    type: "mobile_home_side"
+    uri: "@ranking"
+    sort_order: 23
+    Translation:
+      ja_JP:
+        caption: "[i:191]ﾗﾝｷﾝｸﾞ"
+      en:
+        caption: "Rankingﾞ"

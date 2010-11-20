@@ -20,6 +20,7 @@ class openpneInstallTask extends sfDoctrineBaseTask
       new sfCommandOption('env', null, sfCommandOption::PARAMETER_REQUIRED, 'The environment', 'prod'),
       new sfCommandOption('redo', null, sfCommandOption::PARAMETER_NONE, 'Executes a reinstall'),
       new sfCommandOption('non-recreate-db', null, sfCommandOption::PARAMETER_NONE, 'Non recreate DB'),
+      new sfCommandOption('standalone', null, sfCommandOption::PARAMETER_NONE, 'Standalone install'),
     ));
 
     $this->briefDescription = 'Install OpenPNE';
@@ -136,7 +137,11 @@ EOF;
     {
       $this->logSection('installer', 'start clean install');
     }
-    $this->installPlugins();
+
+    if (!$options['standalone'])
+    { 
+      $this->installPlugins();
+    }
     @$this->fixPerms();
     @$this->clearCache();
     if (!$options['redo'])

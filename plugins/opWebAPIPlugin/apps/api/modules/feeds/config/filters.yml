@@ -1,0 +1,9 @@
+rendering: ~
+
+check_oauth:
+  class: opCheckAllowedAccessWebAPI
+
+security: ~
+
+cache:     ~
+execution: ~
