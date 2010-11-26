@@ -1,3 +1,0 @@
-favorite:
-  class: opFavoritePluginMobileFrontendRouteCollection
-  options: { name: favorite }

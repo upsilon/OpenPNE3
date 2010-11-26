@@ -1,6 +1,0 @@
-diary:
-  _attributes:
-    caption: "Diary Configuration"
-    enable_pc:     true
-    enable_mobile: true
-  diary:

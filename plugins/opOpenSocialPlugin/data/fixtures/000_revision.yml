@@ -1,4 +1,0 @@
-SnsConfig:
-  opensocial_current_revision:
-    name:  "opOpenSocialPlugin_revision"
-    value: 16

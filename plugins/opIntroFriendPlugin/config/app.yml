@@ -1,4 +1,0 @@
-# default values
-all:
-  max_introfriend: 5
-  line_introfriend: 5

@@ -1,3 +1,0 @@
-blog:
-  class: opBlogPluginFrontendRouteCollection
-  options: { name: blog }

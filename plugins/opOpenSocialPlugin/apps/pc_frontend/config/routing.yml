@@ -1,3 +1,0 @@
-opOpenSocial:
-  class: opOpenSocialPluginPcFrontendRouteCollection
-  options: { name: opOpenSocial }

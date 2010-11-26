@@ -1,7 +1,0 @@
-profileSuccess:
-  customize:
-    addFavoriteLink:
-      template: [favorite, addFavoriteLink]
-      parts: [menu]
-      target: [bottom]
-
