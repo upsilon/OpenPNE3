@@ -21,6 +21,7 @@ class openpneInstallTask extends sfDoctrineBaseTask
       new sfCommandOption('redo', null, sfCommandOption::PARAMETER_NONE, 'Executes a reinstall'),
       new sfCommandOption('non-recreate-db', null, sfCommandOption::PARAMETER_NONE, 'Non recreate DB'),
       new sfCommandOption('standalone', null, sfCommandOption::PARAMETER_NONE, 'Standalone install'),
+      new sfCommandOption('sqlite', null, sfCommandOption::PARAMETER_NONE, 'SQLite mode'),
     ));
 
     $this->briefDescription = 'Install OpenPNE';
@@ -31,9 +32,35 @@ Call it with:
   [./symfony openpne:install|INFO]
 EOF;
   }
+  private function sqlite_execute($arguments = array(),$options = array())
+  {
+    $dbms = 'sqlite';
+    $username = '';
+    $password = '';
+    $hostname = '';
+    $port = '';
+    $dbname = "op3.sqlite";
+    $sock = '';
+    $dbname = realpath(dirname($dbname)).DIRECTORY_SEPARATOR.'log'.DIRECTORY_SEPARATOR.basename($dbname);
 
+    $this->doInstall($dbms, $username, $password, $hostname, $port, $dbname, $sock, $options);
+    $this->getFilesystem()->chmod($dbname, 0666);
+
+    $this->publishAssets();
+
+    // _PEAR_call_destructors() causes an E_STRICT error
+    error_reporting(error_reporting() & ~E_STRICT);
+
+    $this->logSection('installer', 'installation is completed!');
+
+  }
   protected function execute($arguments = array(), $options = array())
   {
+    if ($options['sqlite']){
+      $this->sqlite_execute($arguments,$options);
+      return;
+    }
+
     $dbms = '';
     $username = '';
     $password = '';
