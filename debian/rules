@@ -11,6 +11,8 @@ install:
 	dh_installdocs
 	dh_installchangelogs
 	dh_installdeb
+	mkdir -p debian/symfony/usr/share/
+	mv debian/openpne3/usr/share/openpne3/lib/vendor/symfony debian/symfony/usr/share/
 	rm -rf \
 		debian/openpne3/usr/share/openpne3-plugins/sfProtoculousPlugin/web/js/* \
 		debian/openpne3/usr/share/openpne3/web/js/tiny_mce
