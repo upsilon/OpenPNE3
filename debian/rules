@@ -1,5 +1,7 @@
 #!/usr/bin/make -f
 
+different_pkgver=$(shell ls debian/*.version | xargs -Ifile basename file .version)
+
 install:
 	dh_testdir
 	dh_testroot
@@ -18,7 +20,10 @@ install:
 	mv debian/openpne3/usr/share/openpne3/config/ProjectConfiguration.class.php.sample debian/openpne3/etc/openpne3/ProjectConfiguration.class.php
 	touch debian/openpne3/etc/openpne3/databases.yml
 	dh_link
-	dh_gencontrol
+	dh_gencontrol $(shell echo $(different_pkgver) | sed -e 's/\<\(\S*\)/-N\1/g')
+	for pkg in $(different_pkgver); do \
+		dh_gencontrol -p$$pkg -- -v`cat debian/$${pkg}.version`; \
+	done
 	dh_md5sums
 	dh_builddeb
 
