@@ -1,4 +1,5 @@
 etc/openpne3
+etc/apache2/sites-available
 usr/bin
 usr/share/openpne3
 usr/share/openpne3/plugins

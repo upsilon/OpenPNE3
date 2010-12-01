@@ -11,12 +11,10 @@ install:
 	dh_installdocs
 	dh_installchangelogs
 	dh_installdeb
-	mkdir -p debian/symfony/usr/share/
 	mv debian/openpne3/usr/share/openpne3/lib/vendor/symfony debian/symfony/usr/share/
 	rm -rf \
 		debian/openpne3/usr/share/openpne3-plugins/sfProtoculousPlugin/web/js/* \
 		debian/openpne3/usr/share/openpne3/web/js/tiny_mce
-	mkdir -p debian/openpne3/etc/apache2/sites-available
 	cp debian/conf/apache.conf debian/openpne3/etc/apache2/sites-available/openpne3
 	mv debian/openpne3/usr/share/openpne3/config/OpenPNE.yml.sample debian/openpne3/etc/openpne3/OpenPNE.yml
 	mv debian/openpne3/usr/share/openpne3/config/ProjectConfiguration.class.php.sample debian/openpne3/etc/openpne3/ProjectConfiguration.class.php
