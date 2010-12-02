@@ -6,6 +6,7 @@ install:
 	dh_testdir
 	dh_testroot
 	dh_install -Xtest/
+	dh_installdebconf
 	dh_installdirs
 	dh_installcron
 	dh_installdocs

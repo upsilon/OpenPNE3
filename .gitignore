@@ -27,6 +27,7 @@ data/*.lck
 # deb package
 debian/files
 debian/*.substvars
+debian/*.debhelper
 debian/*.debhelper.log
 debian/openpne3/
 debian/openpne3-skin-basic/

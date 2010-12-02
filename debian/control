@@ -11,6 +11,7 @@ Vcs-Browser: http://github.com/upsilon/OpenPNE3
 Package: openpne3
 Architecture: all
 Depends: ${misc:Depends},
+  dbconfig-common,
   apache2 | httpd-cgi,
   php5 (>= 5.2.3), php5-cli, php5-gd, php5-mysql | php5-pgsql | php5-sqlite,
   symfony,

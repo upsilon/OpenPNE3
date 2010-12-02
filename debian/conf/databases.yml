@@ -1,11 +1,30 @@
 <?php require('/etc/openpne3/config-db.php') ?>
 
+<?php
+$dsnParts = array();
+
+if (isset($dbname))
+{
+  $dsnParts[] = $dbtype == 'sqlite3' ? $basepath.'/'.$dbname : 'dbname='.$dbname;
+}
+if (isset($dbserver))
+{
+  $dsnParts[] = 'host='.$dbserver;
+}
+if (isset($dbport))
+{
+  $dnsParts[] = 'port='.$dbport;
+}
+
+$dsn = $dbtype.':'.implode(';', $dsnParts);
+?>
+
 all:
   doctrine:
     class: sfDoctrineDatabase
     param:
-      dsn: <?php echo $dsn ?>
-      username: <?php echo $dbuser ?>
-      password: <?php echo $dbpass ?>
+      dsn: <?php echo $dsn."\n" ?>
+      username: <?php echo $dbuser."\n" ?>
+      password: <?php echo $dbpass."\n" ?>
       encoding: utf8
 
