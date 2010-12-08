@@ -19,7 +19,8 @@ Depends: ${misc:Depends},
   symfony-plugins-imagehandler,
   symfony-plugins-protoculous,
   symfony-plugins-templatingview,
-  tinymce,
+  tinymce, php-openid, php-pear,
+  libphp-simplepie, libphp-oauth, libzend-framework-php,
   openpne3-auth-mailaddress | openpne3-auth,
   openpne3-skin-basic | openpne3-skin
 Recommends: php5-mcrypt, php-apc,
@@ -48,7 +49,7 @@ Description: a social network platform (skin)
 
 Package: symfony
 Architecture: all
-Depends: ${misc:Depends}
+Depends: ${misc:Depends}, php5-cli
 Conflicts: php5-symfony1.0
 Replaces: php5-symfony1.0
 Homepage: http://www.symfony-project.org/
@@ -71,6 +72,6 @@ Description: plugin for symfony -- sfProtoculousPlugin
 
 Package: symfony-plugins-templatingview
 Architecture: all
-Depends: ${misc:Depends}, symfony
+Depends: ${misc:Depends}, symfony, smarty
 Description: plugin for symfony -- sfSymfonyTemplatingViewPlugin
 
