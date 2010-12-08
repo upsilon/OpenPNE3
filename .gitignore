@@ -37,3 +37,5 @@ debian/symfony-plugins-formextra/
 debian/symfony-plugins-imagehandler/
 debian/symfony-plugins-protoculous/
 debian/symfony-plugins-templatingview/
+debian/symfony-plugins-doctrine/
+debian/symfony-plugins-propel/

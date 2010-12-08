@@ -15,6 +15,7 @@ Depends: ${misc:Depends},
   apache2 | httpd-cgi,
   php5 (>= 5.2.3), php5-cli, php5-gd, php5-mysql | php5-pgsql | php5-sqlite,
   symfony,
+  symfony-plugins-doctrine,
   symfony-plugins-formextra,
   symfony-plugins-imagehandler,
   symfony-plugins-protoculous,
@@ -74,4 +75,14 @@ Package: symfony-plugins-templatingview
 Architecture: all
 Depends: ${misc:Depends}, symfony, smarty
 Description: plugin for symfony -- sfSymfonyTemplatingViewPlugin
+
+Package: symfony-plugins-doctrine
+Architecture: all
+Depends: ${misc:Depends}, symfony
+Description: plugin for symfony -- sfDoctrinePlugin
+
+Package: symfony-plugins-propel
+Architecture: all
+Depends: ${misc:Depends}, symfony
+Description: plugin for symfony -- sfPropelPlugin
 
