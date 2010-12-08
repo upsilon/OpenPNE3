@@ -33,6 +33,8 @@ install:
 	for pkg in $(different_pkgver); do \
 		dh_gencontrol -p$$pkg -- -v`cat debian/$${pkg}.version`; \
 	done
+	find debian/*/ -type f -print0 | xargs -0r -Ifile sh -c 'head -n1 file | grep -q "^#!" && chmod +x file || chmod -x file'
+	dh_fixperms
 	dh_md5sums
 	dh_builddeb
 
