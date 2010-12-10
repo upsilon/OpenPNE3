@@ -13,6 +13,7 @@ install:
 	dh_installdocs
 	dh_installchangelogs
 	dh_installdeb
+	dh_lintian
 	mv debian/openpne3/usr/share/openpne3/lib/vendor/symfony debian/symfony/usr/share/
 	mv debian/symfony/usr/share/symfony/lib/plugins/sfDoctrinePlugin debian/symfony-plugins-doctrine/usr/share/symfony/lib/plugins/
 	mv debian/symfony/usr/share/symfony/lib/plugins/sfPropelPlugin debian/symfony-plugins-propel/usr/share/symfony/lib/plugins/

@@ -1,0 +1,5 @@
+# ignore ITP
+symfony: new-package-should-close-itp-bug
+
+# /usr/share/doc/symfony/changelog is symlink
+symfony: changelog-file-not-compressed changelog
