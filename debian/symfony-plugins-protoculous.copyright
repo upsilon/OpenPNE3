@@ -3,39 +3,11 @@ Thu, 08 Oct 2010 23:49:17 +0900.
 
 It was downloaded from: http://github.com/openpne/OpenPNE3
 
-Upstream Authors:
-
-    * OpenPNE Project (http://www.openpne.jp/)
-    * the symfony project (http://www.symfony-project.org/)
-    * Zend Technologies USA Inc. (http://www.zend.com/)
-    * JanRain, Inc. (http://www.janrain.com/)
-    * Andy Smith (http://term.ie/)
-    * Fabien Potencier (http://fabien.potencier.org/)
-    * Kousuke Ebihara (http://co3k.org/)
-
-Copyright:
-
-    Copyright 2005-2010 OpenPNE Project
-
 License:
 
-== OpenPNE3
+sfProtoculousPlugin is licensed under the following terms:
 
-OpenPNE3 is licensed under the Apache License, Version 2.0 (the
-"License"); you may not use this file except in compliance with
-the License. You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-On a Debian system, the license can be found at
-/usr/share/common-licenses/Apache-2.0 .
-
-== symfony
-
-The lib/vendor/symfony directory contains a copy of symfony, is licensed
-under the following terms:
-
-  Copyright (c) 2004-2010 Fabien Potencier
+  Copyright (c) 2004-2006 Fabien Potencier
 
   Permission is hereby granted, free of charge, to any person obtaining a copy
   of this software and associated documentation files (the "Software"), to deal
@@ -52,6 +24,5 @@ under the following terms:
   FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
   AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
   LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+  iOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
   THE SOFTWARE.
-

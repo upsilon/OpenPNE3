@@ -1,0 +1,99 @@
+This package was debianized by Kimura Youichi <kim.upsilon@bucyou.net> on
+Thu, 08 Oct 2010 23:49:17 +0900.
+
+It was downloaded from: http://github.com/openpne/OpenPNE3
+
+License:
+
+== sfPropelPlugin
+
+sfPropelPlugin is licensed under the following terms:
+
+  Copyright (c) 2004-2008 Fabien Potencier
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to deal
+  in the Software without restriction, including without limitation the rights
+  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in all
+  copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+  THE SOFTWARE.
+
+== Propel
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU Lesser General Public
+License as published by the Free Software Foundation; either
+version 2.1 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+Lesser General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program. If not, see <http://www.gnu.org/licenses/>.
+
+On Debian systems, the complete text of the GNU Lesser General
+Public License can be found in "/usr/share/common-licenses/LGPL-2.1".
+
+== phing
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU Lesser General Public
+License as published by the Free Software Foundation; either
+version 2.1 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+Lesser General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program. If not, see <http://www.gnu.org/licenses/>.
+
+On Debian systems, the complete text of the GNU Lesser General
+Public License can be found in "/usr/share/common-licenses/LGPL-2.1".
+
+== Agavi
+
+The contents of LICENSE.Agavi is included here:
+
+  On behalf of Veikko Mäkinen, the original author of Agavi's
+  CreoleSessionStorage, I hereby grant you a special, non-exclusive, worldwide,
+  royalty-free, perpetual license to include and modify the CreoleSessionStorage
+  in the symfony project under a license other than the GNU Lesser General
+  Public License, subject to the following conditions:
+
+  1) you must include and leave intact all copyright notices in the respective
+    parts of the source code, if applicable.
+  2) you must add a note to the source code stating that the original version
+    the file is based on is licensed under the LGPL, but a special license was
+    granted.
+  3) you must either
+    a) include this special license in a LICENSE.Agavi file, and reference it in
+      the COPYRIGHT file, along with the proper copyright information and a note
+      about the special character of this license, deviating from the original
+      LGPL license, or
+    b) include the copyright information and the license itself and make clear
+      the existance and background of this license agreement in a manner of your
+      choice, provided that it is of similar nature to that of other such
+      information about third-party intellectual property bundled with symfony.
+
+  December 8, 2006
+  Munich, Germany
+
+  David Zülke
+  Lead Developer
+  The Agavi Project
+

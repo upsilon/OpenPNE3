@@ -1,0 +1,23 @@
+This package was debianized by Kimura Youichi <kim.upsilon@bucyou.net> on
+Thu, 08 Oct 2010 23:49:17 +0900.
+
+It was downloaded from: http://github.com/openpne/OpenPNE3
+
+Copyright 2009 Kousuke Ebihara
+
+This product includes also software developed by:
+  - Fabien Potencier (http://fabien.potencier.org/)
+    - MIT License
+
+This product includes dependent libraries listed blow:
+  - Symfony Templating (http://components.symfony-project.org/templating)
+
+License:
+sfSymfonyTemplatingViewPlugin is licensed under the Apache License, Version 2.0
+(the "License"); you may not use this file except in compliance with
+the License. You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+On a Debian system, the license can be found at
+/usr/share/common-licenses/Apache-2.0 .

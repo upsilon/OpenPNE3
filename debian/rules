@@ -5,6 +5,7 @@ different_pkgver=$(shell ls debian/*.version | xargs -Ifile basename file .versi
 install:
 	dh_testdir
 	dh_testroot
+	dh_prep
 	dh_install -Xtest/
 	dh_installdebconf
 	dh_installdirs
@@ -22,13 +23,25 @@ install:
 		debian/openpne3/usr/share/openpne3/lib/vendor/OAuth \
 		debian/openpne3/usr/share/openpne3/lib/vendor/PEAR/PEAR \
 		debian/openpne3/usr/share/openpne3/lib/vendor/Zend \
+		debian/symfony/usr/share/symfony/licenses \
+		debian/symfony/usr/share/symfony/LICENSE \
+		debian/symfony/usr/share/symfony/COPYRIGHT \
 		debian/symfony-plugins-templatingview/usr/share/symfony/lib/plugins/sfSymfonyTemplatingViewPlugin/lib/vendor/smarty2 \
+		debian/symfony-plugins-templatingview/usr/share/symfony/lib/plugins/sfSymfonyTemplatingViewPlugin/LISENCE \
+		debian/symfony-plugins-templatingview/usr/share/symfony/lib/plugins/sfSymfonyTemplatingViewPlugin/NOTICE \
+		debian/symfony-plugins-templatingview/usr/share/symfony/lib/plugins/sfSymfonyTemplatingViewPlugin/README \
 		debian/symfony-plugins-protoculous/usr/share/symfony/lib/plugins/sfProtoculousPlugin/web/js/* \
+		debian/symfony-plugins-protoculous/usr/share/symfony/lib/plugins/sfProtoculousPlugin/LICENSE* \
+		debian/symfony-plugins-propel/usr/share/symfony/lib/plugins/sfPropelPlugin/LICENSE* \
+		debian/symfony-plugins-doctrine/usr/share/symfony/lib/plugins/sfDoctrinePlugin/LICENSE \
+		debian/symfony-plugins-imagehandler/usr/share/symfony/lib/plugins/sfImageHandlerPlugin/LICENSE \
+		debian/symfony-plugins-formextra/usr/share/symfony/lib/plugins/sfFormExtraPlugin/LICENSE
 	cp debian/conf/apache.conf debian/openpne3/etc/apache2/sites-available/openpne3
 	mv debian/openpne3/usr/share/openpne3/config/OpenPNE.yml.sample debian/openpne3/etc/openpne3/OpenPNE.yml
 	mv debian/openpne3/usr/share/openpne3/config/ProjectConfiguration.class.php.sample debian/openpne3/etc/openpne3/ProjectConfiguration.class.php
 	touch debian/openpne3/etc/openpne3/databases.yml
 	dh_link
+	dh_compress
 	dh_gencontrol $(shell echo $(different_pkgver) | sed -e 's/\<\(\S*\)/-N\1/g')
 	for pkg in $(different_pkgver); do \
 		dh_gencontrol -p$$pkg -- -v`cat debian/$${pkg}.version`; \
