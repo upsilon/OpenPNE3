@@ -1,0 +1,4 @@
+/etc/apache2/sites-available/openpne3
+/etc/openpne3/OpenPNE.yml
+/etc/openpne3/ProjectConfiguration.class.php
+/etc/openpne3/databases.yml
