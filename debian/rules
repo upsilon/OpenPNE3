@@ -6,7 +6,7 @@ install:
 	dh_testdir
 	dh_testroot
 	dh_prep
-	dh_install -Xtest/
+	dh_install -Xtest/ -X.git
 	dh_installdebconf
 	dh_installdirs
 	dh_installcron
