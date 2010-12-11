@@ -1,19 +1,24 @@
-<?php require('/etc/openpne3/config-db.php') ?>
-
 <?php
+require('/etc/openpne3/config-db.php');
+
 $dsnParts = array();
 
-if (isset($dbname))
+if ($dbtype == 'sqlite3')
 {
-  $dsnParts[] = $dbtype == 'sqlite3' ? $basepath.'/'.$dbname : 'dbname='.$dbname;
+  $dbtype = 'sqlite';
 }
-if (isset($dbserver))
+
+if (!empty($dbname))
+{
+  $dsnParts[] = $dbtype == 'sqlite' ? $basepath.'/'.$dbname : 'dbname='.$dbname;
+}
+if (!empty($dbserver))
 {
   $dsnParts[] = 'host='.$dbserver;
 }
-if (isset($dbport))
+if (!empty($dbport))
 {
-  $dnsParts[] = 'port='.$dbport;
+  $dsnParts[] = 'port='.$dbport;
 }
 
 $dsn = $dbtype.':'.implode(';', $dsnParts);
