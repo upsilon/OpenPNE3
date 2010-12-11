@@ -21,7 +21,7 @@ Depends: ${misc:Depends},
   symfony-plugins-protoculous,
   symfony-plugins-templatingview,
   tinymce, php-openid, php-pear,
-  libphp-simplepie, libphp-oauth, libzend-framework-php,
+  libphp-simplepie, liboauth-php | libphp-oauth, zendframework | libzend-framework-php,
   openpne3-auth-mailaddress | openpne3-auth,
   openpne3-skin-basic | openpne3-skin
 Recommends: php5-mcrypt, php-apc,
