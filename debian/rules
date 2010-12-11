@@ -38,9 +38,11 @@ install:
 		debian/symfony-plugins-imagehandler/usr/share/symfony/lib/plugins/sfImageHandlerPlugin/LICENSE \
 		debian/symfony-plugins-formextra/usr/share/symfony/lib/plugins/sfFormExtraPlugin/LICENSE
 	cp debian/conf/apache.conf debian/openpne3/etc/apache2/sites-available/openpne3
-	mv debian/openpne3/usr/share/openpne3/config/OpenPNE.yml.sample debian/openpne3/etc/openpne3/OpenPNE.yml
 	cp debian/conf/databases.yml debian/openpne3/etc/openpne3/databases.yml
+	cp debian/openpne3/usr/share/openpne3/config/OpenPNE.yml.sample debian/openpne3/etc/openpne3/OpenPNE.yml
 	mv debian/openpne3/usr/share/openpne3/config/ProjectConfiguration.class.php.sample debian/openpne3/etc/openpne3/ProjectConfiguration.class.php
+	chgrp www-data debian/openpne3/var/cache/openpne3
+	chmod g+w debian/openpne3/var/cache/openpne3
 	dh_link
 	dh_compress
 	dh_gencontrol $(shell echo $(different_pkgver) | sed -e 's/\<\(\S*\)/-N\1/g')

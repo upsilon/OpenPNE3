@@ -2,3 +2,11 @@ etc/openpne3/OpenPNE.yml usr/share/openpne3/config/OpenPNE.yml
 etc/openpne3/databases.yml usr/share/openpne3/config/databases.yml
 etc/openpne3/ProjectConfiguration.class.php usr/share/openpne3/config/ProjectConfiguration.class.php
 usr/share/tinymce/www usr/share/openpne3/web/js/tiny_mce
+
+usr/local/share/openpne3-plugins usr/share/openpne3/plugins/local
+var/cache/openpne3 usr/share/openpne3/cache
+var/lib/openpne3/model usr/share/openpne3/lib/model/base
+var/lib/openpne3/form usr/share/openpne3/lib/form/base
+var/lib/openpne3/filter usr/share/openpne3/lib/filter/base
+var/lib/openpne3/sql usr/share/openpne3/data/sql
+var/log/openpne3 usr/share/openpne3/log

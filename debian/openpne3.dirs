@@ -3,3 +3,10 @@ etc/apache2/sites-available
 usr/bin
 usr/share/openpne3
 usr/share/openpne3/plugins
+var/cache/openpne3
+var/lib/openpne3
+var/lib/openpne3/model
+var/lib/openpne3/form
+var/lib/openpne3/filter
+var/lib/openpne3/sql
+var/log/openpne3
