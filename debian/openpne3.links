@@ -10,3 +10,7 @@ var/lib/openpne3/form usr/share/openpne3/lib/form/base
 var/lib/openpne3/filter usr/share/openpne3/lib/filter/base
 var/lib/openpne3/sql usr/share/openpne3/data/sql
 var/log/openpne3 usr/share/openpne3/log
+
+usr/share/symfony/lib/plugins/sfFormExtraPlugin/web usr/share/openpne3/web/sfFormExtraPlugin
+usr/share/symfony/lib/plugins/sfProtoculousPlugin/web usr/share/openpne3/web/sfProtoculousPlugin
+usr/share/symfony/lib/plugins/sfDoctrinePlugin/web usr/share/openpne3/web/sfDoctrinePlugin
