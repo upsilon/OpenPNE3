@@ -21,6 +21,7 @@ fi
 
 case "$1" in
     configure)
+        mkdir /usr/local/share/openpne3-plugins 2>- || true
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)

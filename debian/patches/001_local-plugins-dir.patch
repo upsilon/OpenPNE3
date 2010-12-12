@@ -1,0 +1,12 @@
+diff --git a/lib/vendor/symfony/lib/config/sfProjectConfiguration.class.php b/lib/vendor/symfony/lib/config/sfProjectConfiguration.class.php
+index 7a7316c..46ba73c 100644
+--- a/lib/vendor/symfony/lib/config/sfProjectConfiguration.class.php
++++ b/lib/vendor/symfony/lib/config/sfProjectConfiguration.class.php
+@@ -480,6 +480,7 @@ class sfProjectConfiguration
+     $dirs = array(
+       $this->getSymfonyLibDir().'/plugins',
+       sfConfig::get('sf_plugins_dir'),
++      sfConfig::get('sf_plugins_dir').'/local',
+     );
+ 
+     foreach ($finder->in($dirs) as $path)
