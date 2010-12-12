@@ -1,0 +1,36 @@
+diff --git a/config/ProjectConfiguration.class.php.sample b/config/ProjectConfiguration.class.php.sample
+index e8616f2..d25935d 100644
+--- a/config/ProjectConfiguration.class.php.sample
++++ b/config/ProjectConfiguration.class.php.sample
+@@ -1,11 +1,11 @@
+ <?php
+ 
+-require_once dirname(__FILE__).'/../lib/vendor/symfony/lib/autoload/sfCoreAutoload.class.php';
++require_once '/usr/share/symfony/lib/autoload/sfCoreAutoload.class.php';
+ sfCoreAutoload::register();
+ 
+-require_once dirname(__FILE__).'/../lib/config/opProjectConfiguration.class.php';
++require_once '/usr/share/openpne3/lib/config/opProjectConfiguration.class.php';
+ 
+-define('OPENPNE3_CONFIG_DIR', dirname(__FILE__));
++define('OPENPNE3_CONFIG_DIR', '/usr/share/openpne3/config/');
+ 
+ class ProjectConfiguration extends opProjectConfiguration
+ {
+@@ -25,7 +25,16 @@ class ProjectConfiguration extends opProjectConfiguration
+ 
+   public function setup()
+   {
++    $this->setRootDir('/usr/share/openpne3/');
++
+     // Do not edit this method if unsure
+     parent::setup();
+   }
++
++  static public function getApplicationConfiguration($application, $environment, $debug, $rootDir = null, sfEventDispatcher $dispatcher = null)
++  {
++    $newRootDir = $rootDir === null ? '/usr/share/openpne3/' : $rootDir;
++
++    return parent::getApplicationConfiguration($application, $environment, $debug, $newRootDir, $dispatcher);
++  }
+ }
