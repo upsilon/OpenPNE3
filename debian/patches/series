@@ -1,2 +1,3 @@
 001_local-plugins-dir.patch
 002_set-project-root-dir.patch
+003_require-zend.patch

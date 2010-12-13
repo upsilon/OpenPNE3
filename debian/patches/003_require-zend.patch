@@ -1,0 +1,12 @@
+diff --git a/lib/util/opDoctrineRecord.class.php b/lib/util/opDoctrineRecord.class.php
+index 2803fa6..ed6f143 100644
+--- a/lib/util/opDoctrineRecord.class.php
++++ b/lib/util/opDoctrineRecord.class.php
+@@ -1,5 +1,7 @@
+ <?php
+ 
++require_once 'Zend/Acl.php';
++
+ /**
+  * This file is part of the OpenPNE package.
+  * (c) OpenPNE Project (http://www.openpne.jp/)
