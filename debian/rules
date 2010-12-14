@@ -1,23 +1,14 @@
 #!/usr/bin/make -f
 
-different_pkgver=$(shell ls debian/*.version | xargs -Ifile basename file .version)
+%:
+	dh $@
 
-install:
-	dh_testdir
-	dh_testroot
-	dh_prep
+override_dh_install:
 	dh_install -Xtest/ -X.git
-	dh_installdebconf
-	dh_installdirs
-	dh_installcron
-	dh_installdocs
-	dh_installchangelogs
-	dh_installdeb
-	dh_lintian
 	mv debian/openpne3/usr/share/openpne3/lib/vendor/symfony debian/symfony/usr/share/
 	mv debian/symfony/usr/share/symfony/lib/plugins/sfDoctrinePlugin debian/symfony-plugins-doctrine/usr/share/symfony/lib/plugins/
 	mv debian/symfony/usr/share/symfony/lib/plugins/sfPropelPlugin debian/symfony-plugins-propel/usr/share/symfony/lib/plugins/
-	rm -rf \
+	rm -r \
 		debian/openpne3/usr/share/openpne3/web/js/tiny_mce \
 		debian/openpne3/usr/share/openpne3/lib/vendor/simplepie \
 		debian/openpne3/usr/share/openpne3/lib/vendor/php-openid \
@@ -41,27 +32,23 @@ install:
 	cp debian/conf/databases.yml debian/openpne3/etc/openpne3/databases.yml
 	cp debian/openpne3/usr/share/openpne3/config/OpenPNE.yml.sample debian/openpne3/etc/openpne3/OpenPNE.yml
 	mv debian/openpne3/usr/share/openpne3/config/ProjectConfiguration.class.php.sample debian/openpne3/etc/openpne3/ProjectConfiguration.class.php
+
+override_dh_fixperms:
+	find debian/*/ -type f -print0 | xargs -0r -Ifile sh -c 'head -n1 file | grep -q "^#!" && chmod +x file || chmod -x file'
+	dh_fixperms
 	chgrp www-data debian/openpne3/var/cache/openpne3
 	chmod g+w debian/openpne3/var/cache/openpne3
-	dh_link
-	dh_compress
+
+different_pkgver=$(shell ls debian/*.version | xargs -Ifile basename file .version)
+
+override_dh_gencontrol:
 	dh_gencontrol $(shell echo $(different_pkgver) | sed -e 's/\<\(\S*\)/-N\1/g')
 	for pkg in $(different_pkgver); do \
 		dh_gencontrol -p$$pkg -- -v`cat debian/$${pkg}.version`; \
 	done
-	find debian/*/ -type f -print0 | xargs -0r -Ifile sh -c 'head -n1 file | grep -q "^#!" && chmod +x file || chmod -x file'
-	dh_fixperms
-	dh_md5sums
-	dh_builddeb
 
-clean: 
-	dh_testdir
-	dh_clean
+binary: binary-indep
 
 build:
 
-binary-indep: build install
-binary-arch: build install
-binary: binary-indep binary-arch
-
-.PHONY: build clean binary-indep binary-arch binary install
+.PHONY: binary build override_dh_gencontrol override_dh_fixperms override_dh_install
