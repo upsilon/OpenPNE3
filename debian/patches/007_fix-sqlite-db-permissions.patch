@@ -1,0 +1,22 @@
+diff --git a/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/lib/vendor/doctrine/Doctrine/Export/Sqlite.php b/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/lib/vendor/doctrine/Doctrine/Export/Sqlite.php
+index f9b5058..7db81e3 100644
+--- a/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/lib/vendor/doctrine/Doctrine/Export/Sqlite.php
++++ b/lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/lib/vendor/doctrine/Doctrine/Export/Sqlite.php
+@@ -66,7 +66,9 @@ class Doctrine_Export_Sqlite extends Doctrine_Export
+      */
+     public function createDatabase($databaseFile)
+     {
+-        return new PDO('sqlite:' . $databaseFile);
++        $pdo = new PDO('sqlite:' . $databaseFile);
++        @chmod($databaseFile, 0666);
++        return $pdo;
+     }
+ 
+     /**
+@@ -418,4 +420,4 @@ class Doctrine_Export_Sqlite extends Doctrine_Export
+     {
+         return false;
+     }
+-}
+\ No newline at end of file
++}
