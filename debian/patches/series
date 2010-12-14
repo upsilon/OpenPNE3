@@ -2,3 +2,4 @@
 002_set-project-root-dir.patch
 003_require-zend.patch
 004_disable-propel-if-available.patch
+005_passed-options-to-sub-tasks.patch

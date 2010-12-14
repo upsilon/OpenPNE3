@@ -1,0 +1,42 @@
+diff --git a/lib/task/openpneMigrateTask.class.php b/lib/task/openpneMigrateTask.class.php
+index 0125f60..dbcb6df 100644
+--- a/lib/task/openpneMigrateTask.class.php
++++ b/lib/task/openpneMigrateTask.class.php
+@@ -137,6 +137,7 @@ EOF;
+     }
+ 
+     $task = new sfPluginPublishAssetsTask($this->dispatcher, $this->formatter);
++    $task->setCommandApplication($this->commandApplication);
+     $task->run(array(), array());
+   }
+ 
+@@ -210,8 +211,10 @@ EOF;
+     ));
+ 
+     $task = new sfCacheClearTask($this->dispatcher, $this->formatter);
++    $task->setCommandApplication($this->commandApplication);
+     @$task->run();
+     $task = new openpnePermissionTask($this->dispatcher, $this->formatter);
++    $task->setCommandApplication($this->commandApplication);
+     @$task->run();
+   }
+ 
+@@ -223,8 +226,10 @@ EOF;
+     }
+ 
+     $task = new sfCacheClearTask($this->dispatcher, $this->formatter);
++    $task->setCommandApplication($this->commandApplication);
+     @$task->run();
+     $task = new openpnePermissionTask($this->dispatcher, $this->formatter);
++    $task->setCommandApplication($this->commandApplication);
+     @$task->run();
+ 
+     $options = array();
+@@ -234,6 +239,7 @@ EOF;
+     }
+ 
+     $task = new opPluginSyncTask($this->dispatcher, $this->formatter);
++    $task->setCommandApplication($this->commandApplication);
+     $task->run(array(), $options);
+   }
+ 
