@@ -1,0 +1,13 @@
+diff --git a/web/.htaccess b/web/.htaccess
+index ae05df6..8470f13 100644
+--- a/web/.htaccess
++++ b/web/.htaccess
+@@ -5,7 +5,7 @@ Options +FollowSymLinks +ExecCGI
+ 
+   # uncomment the following line, if you are having trouble
+   # getting no_script_name to work
+-  #RewriteBase /
++  RewriteBase /openpne3/
+ 
+   # we skip all files with .something
+   #RewriteCond %{REQUEST_URI} \..+$
