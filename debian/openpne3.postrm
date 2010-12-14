@@ -28,6 +28,10 @@ fi
 
 case "$1" in
     purge|remove|upgrade|failed-upgrade|abort-install|abort-upgrade|disappear)
+        if [ -f /usr/bin/a2dissite ]; then
+            a2dissite -q openpne3
+        fi
+
         if [ "$1" = 'purge' ]; then
             rmdir /usr/local/share/openpne3-plugins/
         fi
