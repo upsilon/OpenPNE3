@@ -1,0 +1,19 @@
+diff --git a/lib/config/opProjectConfiguration.class.php b/lib/config/opProjectConfiguration.class.php
+index de1b040..d2fe7c8 100644
+--- a/lib/config/opProjectConfiguration.class.php
++++ b/lib/config/opProjectConfiguration.class.php
+@@ -35,7 +35,13 @@ class opProjectConfiguration extends sfProjectConfiguration
+ 
+   public function setup()
+   {
+-    $this->enableAllPluginsExcept(array('sfPropelPlugin'));
++    $pluginExclude = array();
++    if (in_array('sfPropelPlugin', $this->getAllPluginPaths()))
++    {
++      $pluginExclude[] = 'sfPropelPlugin';
++    }
++
++    $this->enableAllPluginsExcept($pluginExclude);
+     $this->setIncludePath();
+ 
+     require_once dirname(__FILE__).'/../util/opToolkit.class.php';
