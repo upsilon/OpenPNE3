@@ -1,0 +1,2 @@
+# ignore ITP
+symfony-plugin-templatingview: new-package-should-close-itp-bug

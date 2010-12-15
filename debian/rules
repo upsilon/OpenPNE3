@@ -6,8 +6,8 @@
 override_dh_install:
 	dh_install -Xtest/ -X.git
 	mv debian/openpne3/usr/share/openpne3/lib/vendor/symfony debian/symfony/usr/share/
-	mv debian/symfony/usr/share/symfony/lib/plugins/sfDoctrinePlugin debian/symfony-plugins-doctrine/usr/share/symfony/lib/plugins/
-	mv debian/symfony/usr/share/symfony/lib/plugins/sfPropelPlugin debian/symfony-plugins-propel/usr/share/symfony/lib/plugins/
+	mv debian/symfony/usr/share/symfony/lib/plugins/sfDoctrinePlugin debian/symfony-plugin-doctrine/usr/share/symfony/lib/plugins/
+	mv debian/symfony/usr/share/symfony/lib/plugins/sfPropelPlugin debian/symfony-plugin-propel/usr/share/symfony/lib/plugins/
 	rm -r \
 		debian/openpne3/usr/share/openpne3/web/js/tiny_mce \
 		debian/openpne3/usr/share/openpne3/lib/vendor/simplepie \
@@ -18,16 +18,16 @@ override_dh_install:
 		debian/symfony/usr/share/symfony/licenses \
 		debian/symfony/usr/share/symfony/LICENSE \
 		debian/symfony/usr/share/symfony/COPYRIGHT \
-		debian/symfony-plugins-templatingview/usr/share/symfony/lib/plugins/sfSymfonyTemplatingViewPlugin/lib/vendor/smarty2 \
-		debian/symfony-plugins-templatingview/usr/share/symfony/lib/plugins/sfSymfonyTemplatingViewPlugin/LISENCE \
-		debian/symfony-plugins-templatingview/usr/share/symfony/lib/plugins/sfSymfonyTemplatingViewPlugin/NOTICE \
-		debian/symfony-plugins-templatingview/usr/share/symfony/lib/plugins/sfSymfonyTemplatingViewPlugin/README \
-		debian/symfony-plugins-protoculous/usr/share/symfony/lib/plugins/sfProtoculousPlugin/web/js/* \
-		debian/symfony-plugins-protoculous/usr/share/symfony/lib/plugins/sfProtoculousPlugin/LICENSE* \
-		debian/symfony-plugins-propel/usr/share/symfony/lib/plugins/sfPropelPlugin/LICENSE* \
-		debian/symfony-plugins-doctrine/usr/share/symfony/lib/plugins/sfDoctrinePlugin/LICENSE \
-		debian/symfony-plugins-imagehandler/usr/share/symfony/lib/plugins/sfImageHandlerPlugin/LICENSE \
-		debian/symfony-plugins-formextra/usr/share/symfony/lib/plugins/sfFormExtraPlugin/LICENSE
+		debian/symfony-plugin-templatingview/usr/share/symfony/lib/plugins/sfSymfonyTemplatingViewPlugin/lib/vendor/smarty2 \
+		debian/symfony-plugin-templatingview/usr/share/symfony/lib/plugins/sfSymfonyTemplatingViewPlugin/LISENCE \
+		debian/symfony-plugin-templatingview/usr/share/symfony/lib/plugins/sfSymfonyTemplatingViewPlugin/NOTICE \
+		debian/symfony-plugin-templatingview/usr/share/symfony/lib/plugins/sfSymfonyTemplatingViewPlugin/README \
+		debian/symfony-plugin-protoculous/usr/share/symfony/lib/plugins/sfProtoculousPlugin/web/js/* \
+		debian/symfony-plugin-protoculous/usr/share/symfony/lib/plugins/sfProtoculousPlugin/LICENSE* \
+		debian/symfony-plugin-propel/usr/share/symfony/lib/plugins/sfPropelPlugin/LICENSE* \
+		debian/symfony-plugin-doctrine/usr/share/symfony/lib/plugins/sfDoctrinePlugin/LICENSE \
+		debian/symfony-plugin-imagehandler/usr/share/symfony/lib/plugins/sfImageHandlerPlugin/LICENSE \
+		debian/symfony-plugin-formextra/usr/share/symfony/lib/plugins/sfFormExtraPlugin/LICENSE
 	cp debian/conf/apache.conf debian/openpne3/etc/apache2/sites-available/openpne3
 	cp debian/conf/databases.yml debian/openpne3/etc/openpne3/databases.yml
 	cp debian/openpne3/usr/share/openpne3/config/OpenPNE.yml.sample debian/openpne3/etc/openpne3/OpenPNE.yml

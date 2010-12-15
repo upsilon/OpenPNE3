@@ -33,10 +33,10 @@ debian/openpne3/
 debian/openpne3-skin-basic/
 debian/openpne3-skin-classic/
 debian/symfony/
-debian/symfony-plugins-formextra/
-debian/symfony-plugins-imagehandler/
-debian/symfony-plugins-protoculous/
-debian/symfony-plugins-templatingview/
-debian/symfony-plugins-doctrine/
-debian/symfony-plugins-propel/
+debian/symfony-plugin-formextra/
+debian/symfony-plugin-imagehandler/
+debian/symfony-plugin-protoculous/
+debian/symfony-plugin-templatingview/
+debian/symfony-plugin-doctrine/
+debian/symfony-plugin-propel/
 .pc/

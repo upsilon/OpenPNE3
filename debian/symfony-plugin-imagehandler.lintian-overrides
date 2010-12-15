@@ -1,0 +1,2 @@
+# ignore ITP
+symfony-plugin-imagehandler: new-package-should-close-itp-bug

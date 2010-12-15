@@ -1,0 +1,2 @@
+# ignore ITP
+symfony-plugin-doctrine: new-package-should-close-itp-bug
