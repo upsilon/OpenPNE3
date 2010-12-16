@@ -1,0 +1,31 @@
+diff --git a/lib/config/opProjectConfiguration.class.php b/lib/config/opProjectConfiguration.class.php
+index de1b040..25ae37f 100644
+--- a/lib/config/opProjectConfiguration.class.php
++++ b/lib/config/opProjectConfiguration.class.php
+@@ -89,6 +89,13 @@ class opProjectConfiguration extends sfProjectConfiguration
+     ));
+   }
+ 
++  public function getPluginPath($name)
++  {
++    $plugins = $this->getAllPluginPaths();
++
++    return $plugins[$name];
++  }
++
+   public function configureDoctrine($manager)
+   {
+     $manager->setAttribute(Doctrine::ATTR_AUTOLOAD_TABLE_CLASSES, true);
+diff --git a/lib/helper/opJavascriptHelper.php b/lib/helper/opJavascriptHelper.php
+index 9d5efb5..5b5ecbe 100644
+--- a/lib/helper/opJavascriptHelper.php
++++ b/lib/helper/opJavascriptHelper.php
+@@ -16,7 +16,7 @@
+  * @author     Kousuke Ebihara <ebihara@tejimaya.com>
+  */
+ 
+-require_once sfConfig::get('sf_plugins_dir').'/sfProtoculousPlugin/lib/helper/JavascriptHelper.php';
++require_once sfContext::getInstance()->getConfiguration()->getPluginPath('sfProtoculousPlugin').'/lib/helper/JavascriptHelper.php';
+ 
+ /**
+  * Makes contents to be a modal box.
