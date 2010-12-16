@@ -28,12 +28,12 @@ fi
 
 case "$1" in
     purge|remove|upgrade|failed-upgrade|abort-install|abort-upgrade|disappear)
-        if [ -f /usr/sbin/a2dissite ]; then
-            a2dissite -q openpne3
+        if [ "$1" = 'remove' -a -f /usr/sbin/a2dissite ]; then
+            a2dissite -q openpne3 || true
         fi
 
         if [ "$1" = 'purge' ]; then
-            rmdir /usr/local/share/openpne3-plugins/
+            rmdir /usr/local/share/openpne3-plugins/ 2>- || true
         fi
     ;;
 
