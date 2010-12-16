@@ -5,8 +5,24 @@
 
 set -e
 
+symfony() {
+  (cd /usr/share/openpne3/; ./symfony $@)
+}
+
 if [ "$1" = 'triggered' ]; then
-  (cd /usr/share/openpne3/; ./symfony cache:clear -q)
+  case " $2 " in
+    *' /usr/share/openpne3/ '*)
+      symfony cache:clear -q
+      ;;
+  esac
+
+  case " $2 " in
+    *' openpne3-migrate '*)
+      echo 'Migrating OpenPNE3 databases ...'
+      symfony openpne:migrate -q --no-update-plugin
+      ;;
+  esac
+
   exit 0
 fi
 
@@ -28,10 +44,10 @@ case "$1" in
     configure)
         if [ -z "$2" ]; then
             echo 'Creating OpenPNE3 databases ...'
-            (cd /usr/share/openpne3/; ./symfony doctrine:build -q --no-confirmation --all --and-load)
+            symfony doctrine:build -q --no-confirmation --all --and-load
         else
             echo 'Migrating OpenPNE3 databases ...'
-            (cd /usr/share/openpne3/; ./symfony openpne:migrate -q --no-update-plugin)
+            symfony openpne:migrate -q --no-update-plugin
         fi
 
         mkdir /usr/local/share/openpne3-plugins 2>- || true
