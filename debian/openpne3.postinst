@@ -36,7 +36,7 @@ case "$1" in
 
         mkdir /usr/local/share/openpne3-plugins 2>- || true
 
-        if [ -f /usr/bin/a2enmod ]; then
+        if [ -f /usr/sbin/a2enmod ]; then
             a2enmod -q rewrite
             a2ensite -q openpne3
             invoke-rc.d apache2 reload
