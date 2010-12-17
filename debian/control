@@ -78,11 +78,11 @@ Description: plugin for symfony -- sfSymfonyTemplatingViewPlugin
 
 Package: symfony-plugin-doctrine
 Architecture: all
-Depends: ${misc:Depends}, symfony
+Depends: ${misc:Depends}, symfony, php5-cli
 Description: plugin for symfony -- sfDoctrinePlugin
 
 Package: symfony-plugin-propel
 Architecture: all
-Depends: ${misc:Depends}, symfony
+Depends: ${misc:Depends}, symfony, php5-cli
 Description: plugin for symfony -- sfPropelPlugin
 

@@ -4,7 +4,7 @@
 	dh $@
 
 override_dh_install:
-	dh_install -Xtest/ -X.git
+	dh_install -X.git
 	mv debian/openpne3/usr/share/openpne3/lib/vendor/symfony debian/symfony/usr/share/
 	mv debian/symfony/usr/share/symfony/lib/plugins/sfDoctrinePlugin debian/symfony-plugin-doctrine/usr/share/symfony/lib/plugins/
 	mv debian/symfony/usr/share/symfony/lib/plugins/sfPropelPlugin debian/symfony-plugin-propel/usr/share/symfony/lib/plugins/
