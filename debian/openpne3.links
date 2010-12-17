@@ -5,9 +5,9 @@ usr/share/tinymce/www usr/share/openpne3/web/js/tiny_mce
 
 usr/local/share/openpne3-plugins usr/share/openpne3/plugins/local
 var/cache/openpne3 usr/share/openpne3/cache
-var/lib/openpne3/model usr/share/openpne3/lib/model/base
-var/lib/openpne3/form usr/share/openpne3/lib/form/base
-var/lib/openpne3/filter usr/share/openpne3/lib/filter/base
+var/lib/openpne3/model usr/share/openpne3/lib/model/doctrine/base
+var/lib/openpne3/form usr/share/openpne3/lib/form/doctrine/base
+var/lib/openpne3/filter usr/share/openpne3/lib/filter/doctrine/base
 var/lib/openpne3/sql usr/share/openpne3/data/sql
 var/log/openpne3 usr/share/openpne3/log
 
