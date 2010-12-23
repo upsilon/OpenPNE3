@@ -5,5 +5,5 @@
 005_passed-options-to-sub-tasks.patch
 006_set-rewrite-base.patch
 007_fix-sqlite-db-permissions.patch
-008_move-setcachedir-method.patch
+008_fix-cache-dir.patch
 009_fix-plugin-path.patch

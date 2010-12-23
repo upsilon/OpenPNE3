@@ -28,31 +28,36 @@ index 5a288dd..a64d7ca 100644
    {
      list($route, $parameters) = sfContext::getInstance()->getController()
 diff --git a/lib/config/opProjectConfiguration.class.php b/lib/config/opProjectConfiguration.class.php
-index de1b040..bbb7490 100644
+index de1b040..97ce67b 100644
 --- a/lib/config/opProjectConfiguration.class.php
 +++ b/lib/config/opProjectConfiguration.class.php
-@@ -115,6 +115,24 @@ class opProjectConfiguration extends sfProjectConfiguration
-     $this->setupProjectOpenPNEDoctrine($manager);
+@@ -142,6 +142,29 @@ class opProjectConfiguration extends sfProjectConfiguration
+     }
    }
  
-+  public function setCacheDir($cacheDir)
++  public function setRootDir($rootDir)
 +  {
-+    $newCacheDir = $cacheDir.DIRECTORY_SEPARATOR;
-+    if (is_callable('posix_getuid'))
-+    {
-+      $userinfo = posix_getpwuid(posix_getuid());
-+      $newCacheDir .= $userinfo['name'];
-+    }
-+    else
-+    {
-+      $newCacheDir .= php_sapi_name();
-+    }
++    parent::setRootDir($rootDir);
 +
-+    sfConfig::set('sf_cache_dir', $newCacheDir);
++    if (sfConfig::get('sf_task_name') !== 'sfCacheClearTask')
++    {
++      $newCacheDir = sfConfig::get('sf_cache_dir').DIRECTORY_SEPARATOR;
++      if (is_callable('posix_getuid'))
++      {
++        $userinfo = posix_getpwuid(posix_getuid());
++        $newCacheDir .= $userinfo['name'];
++      }
++      else
++      {
++        $newCacheDir .= php_sapi_name();
++      }
 +
-+    parent::setCacheDir($newCacheDir);
++      sfConfig::set('sf_cache_dir', $newCacheDir);
++
++      $this->setCacheDir($newCacheDir);
++    }
 +  }
 +
-   protected function setOpenPNEConfiguration()
+   static public function filterDoctrineCliConfig($event, $config)
    {
-     $opConfigCachePath = sfConfig::get('sf_cache_dir').DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'OpenPNE.yml.php';
+     $config['migrations_path'] = sfConfig::get('sf_data_dir').'/migrations/generated';
