@@ -1,0 +1,87 @@
+[submodule "plugins/opAlbumPlugin"]
+	path = plugins/opAlbumPlugin
+	url = git://github.com/mogi/opAlbumPlugin.git
+[submodule "plugins/opAshiatoPlugin"]
+	path = plugins/opAshiatoPlugin
+	url = git://github.com/tejimaya/opAshiatoPlugin.git
+[submodule "plugins/opAuthMailAddressPlugin"]
+	path = plugins/opAuthMailAddressPlugin
+	url = git://github.com/ebihara/opAuthMailAddressPlugin.git
+[submodule "plugins/opAuthMobileUIDPlugin"]
+	path = plugins/opAuthMobileUIDPlugin
+	url = git://github.com/ebihara/opAuthMobileUIDPlugin.git
+[submodule "plugins/opAuthOpenIDPlugin"]
+	path = plugins/opAuthOpenIDPlugin
+	url = git://github.com/ebihara/opAuthOpenIDPlugin.git
+[submodule "plugins/opBlogPlugin"]
+	path = plugins/opBlogPlugin
+	url = git://github.com/nothan/opBlogPlugin.git
+[submodule "plugins/opBookmarkPlugin"]
+	path = plugins/opBookmarkPlugin
+	url = git://github.com/77web/opBookmarkPlugin.git
+[submodule "plugins/opCalendarPlugin"]
+	path = plugins/opCalendarPlugin
+	url = git://github.com/ShinichiU/opCalendarPlugin.git
+[submodule "plugins/opChatPlugin"]
+	path = plugins/opChatPlugin
+	url = git://github.com/upsilon/opChatPlugin.git
+[submodule "plugins/opCommunityIntroductionPlugin"]
+	path = plugins/opCommunityIntroductionPlugin
+	url = git://github.com/nothan/opCommunityIntroductionPlugin.git
+[submodule "plugins/opCommunityTopicPlugin"]
+	path = plugins/opCommunityTopicPlugin
+	url = git://github.com/tejimaya/opCommunityTopicPlugin.git
+[submodule "plugins/opDiaryPlugin"]
+	path = plugins/opDiaryPlugin
+	url = git://github.com/balibali/opDiaryPlugin.git
+[submodule "plugins/opDisIE6Plugin"]
+	path = plugins/opDisIE6Plugin
+	url = git://github.com/kawahara/opDisIE6Plugin.git
+[submodule "plugins/opFavoritePlugin"]
+	path = plugins/opFavoritePlugin
+	url = git://github.com/nothan/opFavoritePlugin.git
+[submodule "plugins/opFreepagePlugin"]
+	path = plugins/opFreepagePlugin
+	url = git://github.com/uechoco/opFreepagePlugin.git
+[submodule "plugins/opIdCallPlugin"]
+	path = plugins/opIdCallPlugin
+	url = git://github.com/tozuka/opIdCallPlugin.git
+[submodule "plugins/opInquiryLEPlugin"]
+	path = plugins/opInquiryLEPlugin
+	url = git://github.com/kiiro/opInquiryLEPlugin.git
+[submodule "plugins/opIntroFriendPlugin"]
+	path = plugins/opIntroFriendPlugin
+	url = git://github.com/nothan/opIntroFriendPlugin.git
+[submodule "plugins/opKdtPlugin"]
+	path = plugins/opKdtPlugin
+	url = git://github.com/kawahara/opKdtPlugin.git
+[submodule "plugins/opMessagePlugin"]
+	path = plugins/opMessagePlugin
+	url = git://github.com/martini2002jp/opMessagePlugin.git
+[submodule "plugins/opOpenSocialPlugin"]
+	path = plugins/opOpenSocialPlugin
+	url = git://github.com/kawahara/opOpenSocialPlugin.git
+[submodule "plugins/opPointPlugin"]
+	path = plugins/opPointPlugin
+	url = git://github.com/kawahara/opPointPlugin.git
+[submodule "plugins/opRankingPlugin"]
+	path = plugins/opRankingPlugin
+	url = git://github.com/nothan/opRankingPlugin.git
+[submodule "plugins/opRichTextareaSyntaxHighlightPlugin"]
+	path = plugins/opRichTextareaSyntaxHighlightPlugin
+	url = git://github.com/balibali/opRichTextareaSyntaxHighlightPlugin.git
+[submodule "plugins/opSkinBasicCss3Plugin"]
+	path = plugins/opSkinBasicCss3Plugin
+	url = git://github.com/upsilon/opSkinBasicCss3Plugin.git
+[submodule "plugins/opTagPlugin"]
+	path = plugins/opTagPlugin
+	url = git://github.com/77web/opTagPlugin.git
+[submodule "plugins/opTwitterCompatAPIPlugin"]
+	path = plugins/opTwitterCompatAPIPlugin
+	url = git://github.com/upsilon/opTwitterCompatAPIPlugin.git
+[submodule "plugins/opWebAPIPlugin"]
+	path = plugins/opWebAPIPlugin
+	url = git://github.com/ebihara/opWebAPIPlugin.git
+[submodule "plugins/opWikifyPlugin"]
+	path = plugins/opWikifyPlugin
+	url = git://github.com/upsilon/opWikifyPlugin.git
