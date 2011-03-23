@@ -4,11 +4,9 @@
 <?php include_http_metas() ?>
 <?php include_metas() ?>
 <?php include_title() ?>
+<?php use_stylesheet('/cache/css/customizing.css') ?>
 <?php include_stylesheets() ?>
 <?php include_javascripts() ?>
-<?php if (Doctrine::getTable('SnsConfig')->get('customizing_css')): ?>
-<link rel="stylesheet" type="text/css" href="<?php echo url_for('@customizing_css') ?>" />
-<?php endif; ?>
 <?php echo $op_config->get('pc_html_head') ?>
 </head>
 <body id="<?php printf('page_%s_%s', $view->getModuleName(), $view->getActionName()) ?>" class="<?php echo opToolkit::isSecurePage() ? 'secure_page' : 'insecure_page' ?>">
