@@ -24,8 +24,8 @@ class sfValidatorPassword extends sfValidatorRegex
   {
     parent::configure($options, $messages);
 
-    $this->setOption('pattern', '/^[a-z0-9]+$/i');
-    $this->addOption('max_length', 12);
+    $this->setOption('pattern', '/^[[:graph:]]+$/i');
+    $this->addOption('max_length', null);
     $this->addOption('min_length', 6);
     $this->setMessage('max_length', 'password is too long (%max_length% characters max).');
     $this->setMessage('min_length', 'password is too short (%min_length% characters min).');
