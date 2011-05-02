@@ -36,7 +36,7 @@ class sfValidatorPassword extends sfValidatorRegex
    */
   protected function doClean($value)
   {
-    $clean = md5(parent::doClean($value));
+    $clean = opPasswordHash::generateHash(parent::doClean($value));
     return $clean;
   }
 }

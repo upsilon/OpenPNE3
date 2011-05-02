@@ -51,7 +51,7 @@ class opAdminLoginForm extends sfForm
       throw new sfValidatorError($validator, 'invalid');
     }
 
-    if ($adminUser->getPassword() === md5($values['password']))
+    if (opPasswordHash::checkPassword($values['password'], $adminUser->getPassword()))
     {
       $values['adminUser'] = $adminUser;
       return $values;

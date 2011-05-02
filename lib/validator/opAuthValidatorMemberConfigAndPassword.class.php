@@ -40,9 +40,9 @@ class opAuthValidatorMemberConfigAndPassword extends opAuthValidatorMemberConfig
       opActivateBehavior::enable();
     }
 
-    $valid_password = Doctrine::getTable('MemberConfig')->retrieveByNameAndMemberId('password', $values['member']->getId())->getValue();
+    $hashedPassword = $values['member']->getConfig('password');
     opActivateBehavior::enable();
-    if (md5($values['password']) !== $valid_password)
+    if (!opPasswordHash::checkPassword($values['password'], $hashedPassword))
     {
       throw new sfValidatorError($this, 'invalid');
     }

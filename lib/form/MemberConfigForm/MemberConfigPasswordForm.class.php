@@ -29,7 +29,8 @@ class MemberConfigPasswordForm extends MemberConfigForm
   public function isValidPassword($validator, $value)
   {
     $member = sfContext::getInstance()->getUser()->getMember();
-    if (md5($value) !== Doctrine::getTable('MemberConfig')->retrieveByNameAndMemberId('password', $member->getId())->getValue())
+    $hashedPassword = $member->getConfig('password');
+    if (!opPasswordHash::checkPassword($value, $hashedPassword))
     {
       throw new sfValidatorError(new sfValidatorPass(), 'invalid', array('value' => $value));
     }

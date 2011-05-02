@@ -12,6 +12,6 @@ class AdminUser extends BaseAdminUser
 {
   public function preSave($event)
   {
-    $this->password = md5($this->password);
+    $this->password = opPasswordHash::generateHash($this->password);
   }
 }

@@ -36,7 +36,8 @@ class opPasswordForm extends BaseForm
   public function isValidPassword($validator, $value)
   {
     $member = $this->options['member'];
-    if (md5($value) !== Doctrine::getTable('MemberConfig')->retrieveByNameAndMemberId('password', $member->getId())->getValue())
+    $hashedPassword = $member->getConfig('password');
+    if (!opPasswordHash::checkPassword($value, $hashedPassword))
     {
       throw new sfValidatorError(new sfValidatorPass(), 'invalid', array('value' => $value));
     }

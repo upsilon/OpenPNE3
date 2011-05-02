@@ -33,7 +33,7 @@ class AdminUserEditPasswordForm extends AdminUserForm
 
   public static function validate($validator, $values, $arguments = array())
   {
-    if ($arguments['object']->getPassword() === md5($values['old_password']))
+    if (opPasswordHash::checkPassword($values['old_password'], $arguments['object']->getPassword()))
     {
       $values['username'] = $arguments['object']->getUsername();
       $values['password'] = $values['new_password'];
