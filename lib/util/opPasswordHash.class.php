@@ -19,8 +19,15 @@ class opPasswordHash
 {
   static public function generateHash($password)
   {
-    $hasher = new PasswordHash(8, false);
-    return $hasher->HashPassword($password);
+    if (sfConfig::get('op_password_through_phpass', true))
+    {
+      $hasher = new PasswordHash(8, false);
+      return $hasher->HashPassword($password);
+    }
+    else
+    {
+      return md5($password);
+    }
   }
 
   static public function checkPassword($password, $hash)

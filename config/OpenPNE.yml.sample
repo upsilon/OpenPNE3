@@ -180,6 +180,14 @@ image_storage: Default  # DB に画像バイナリを保存します (Store imag
 #image_storage_filesystem_master_dir: '/path/to/directory'
 
 ######################################
+# パスワード (Password)
+######################################
+
+# パスワードの生成に phpass を使用する
+# Generate a password through phpass. For compatibility with old installations set this to false.
+password_through_phpass: true
+
+######################################
 # データベース (Database)
 ######################################
 
