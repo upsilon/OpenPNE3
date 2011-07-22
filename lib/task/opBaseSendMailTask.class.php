@@ -8,7 +8,7 @@
  * file and the NOTICE file that were distributed with this source code.
  */
 
-abstract class opBaseSendMailTask extends sfDoctrineBaseTask
+abstract class opBaseSendMailTask extends sfBaseTask
 {
   protected function configure()
   {

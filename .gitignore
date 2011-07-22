@@ -13,9 +13,13 @@ config/databases.yml
 config/OpenPNE.yml
 config/plugins.yml
 lib/model/doctrine/base/*
+lib/model/om/*
+lib/model/map/*
 data/sql/*.*
 lib/form/doctrine/base/*
+lib/form/base/*
 lib/filter/doctrine/base/*
+lib/filter/base/*
 lib/model/doctrine/op*Plugin
 web/*Plugin
 web/sf

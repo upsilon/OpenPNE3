@@ -8,7 +8,7 @@
  * file and the NOTICE file that were distributed with this source code.
  */
 
-class openpneInstallTask extends sfDoctrineBaseTask
+class openpneInstallTask extends sfBaseTask
 {
   protected function configure()
   {
