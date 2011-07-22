@@ -25,4 +25,5 @@ class opActivateListener extends Doctrine_Record_Listener
       $query->addWhere($field.' = ? OR '.$field.' IS NULL', array(true));
     }
   }
+
 }

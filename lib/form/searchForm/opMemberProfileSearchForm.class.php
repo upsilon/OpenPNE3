@@ -26,7 +26,7 @@ class opMemberProfileSearchForm extends BaseForm
 
   protected function getProfiles()
   {
-    return Doctrine::getTable('Profile')->retrieveByIsDispSearch();
+    return ProfilePeer::retrieveByIsDispSearch();
   }
 
   public function configure()
@@ -47,12 +47,12 @@ class opMemberProfileSearchForm extends BaseForm
 
     foreach ($this->getProfiles() as $profile)
     {
-      if (ProfileTable::PUBLIC_FLAG_PRIVATE == $profile->default_public_flag && !$profile->is_edit_public_flag)
+      if (ProfilePeer::PUBLIC_FLAG_PRIVATE == $profile->getDefaultPublicFlag() && !$profile->getIsEditPublicFlag())
       {
         continue;
       }
 
-      $profileI18n = $profile->Translation[$culture]->toArray();
+      $profileI18n = $profile->getCurrentProfileI18n($culture)->toArray();
 
       if ($profile->isPreset())
       {
@@ -78,15 +78,15 @@ class opMemberProfileSearchForm extends BaseForm
     $this->widgetSchema->setNameFormat('member[%s]');
   }
 
-  protected function addIdColumnQuery(Doctrine_Query $query, $value)
+  protected function addIdColumnQuery(ModelCriteria $query, $value)
   {
     if (!empty($value))
     {
-      $query->andWhere('id = ?', $value);
+      $query->filterById($value);
     }
   }
 
-  protected function addNameColumnQuery(Doctrine_Query $query, $value)
+  protected function addNameColumnQuery(ModelCriteria $query, $value)
   {
     if (!empty($value))
     {
@@ -94,14 +94,14 @@ class opMemberProfileSearchForm extends BaseForm
       {
         foreach ($value as $v)
         {
-          $query->addWhere('name LIKE ?', '%'.$v.'%');
+          $query->filterByName('%'.$v.'%');
         }
       }
       else
       {
         if (!empty($value))
         {
-          $query->addWhere('name LIKE ?', '%'.$values.'%');
+          $query->filterByName('%'.$values.'%');
         }
       }
     }
@@ -111,7 +111,7 @@ class opMemberProfileSearchForm extends BaseForm
   {
     $isWhere = false;
     $ids = null;
-    $q = Doctrine::getTable('Member')->createQuery();
+    $q = MemberQuery::create();
 
     if ($this->getOption('is_use_id'))
     {
@@ -148,7 +148,7 @@ class opMemberProfileSearchForm extends BaseForm
       }
     }
 
-    $ids = Doctrine::getTable('MemberProfile')->searchMemberIds($profileValues, $ids, $this->getOption('is_check_public_flag', true));
+    $ids = MemberProfilePeer::searchMemberIds($profileValues, $ids, $this->getOption('is_check_public_flag', true));
 
     if ($isWhere)
     {

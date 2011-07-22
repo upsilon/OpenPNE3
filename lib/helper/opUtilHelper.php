@@ -738,7 +738,7 @@ function op_mail_to($route, $params = array(), $name = '', $options = array(), $
 
 function op_banner($name)
 {
-  $banner = Doctrine::getTable('Banner')->findByName($name);
+  $banner = BannerQuery::create()->findOneByName($name);
   if (!$banner)
   {
     return false;

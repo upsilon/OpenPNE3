@@ -69,7 +69,7 @@ class opSecurityUser extends opAdaptableUser
       return unserialize($this->serializedMember);
     }
 
-    $result = Doctrine::getTable('Member')->find($this->getMemberId());
+    $result = MemberQuery::create()->findPk($this->getMemberId());
     if ($result)
     {
       $this->serializedMember = serialize($result);

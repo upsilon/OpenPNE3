@@ -3,38 +3,55 @@ Navigation:
     type: "mobile_home_side"
     uri: "@member_invite"
     sort_order: 0
-    Translation:
-      ja_JP:
-        caption: "[i:140]友人を誘う"
-      en:
-        caption: "Invite"
 
   mobile_home_navigation_friend:
     type: "mobile_home"
     uri: "@friend_list"
     sort_order: 0
-    Translation:
-      ja_JP:
-        caption: "[i:140]ﾏｲﾌﾚﾝﾄﾞ"
-      en:
-        caption: "My Friends"
 
   mobile_home_navigation_community:
     type: "mobile_home"
     uri: "@community_joinlist"
     sort_order: 10
-    Translation:
-      ja_JP:
-        caption: "[i:155]参加ｺﾐｭﾆﾃｨ"
-      en:
-        caption: "Communities"
 
   mobile_home_center_navigation_profile:
     type: "mobile_home_center"
     uri: "@member_profile_mine"
     sort_order: 0
-    Translation:
-      ja_JP:
-        caption: "[i:140]ﾌﾟﾛﾌｨｰﾙ"
-      en:
-        caption: "Profile"
+
+NavigationI18n:
+  mobile_home_side_navigation_invite_ja:
+    id: mobile_home_side_navigation_invite
+    culture: ja_JP
+    caption: "[i:140]友人を誘う"
+  mobile_home_side_navigation_invite_en:
+    id: mobile_home_side_navigation_invite
+    culture: en
+    caption: "Invite"
+
+  mobile_home_navigation_friend_ja:
+    id: mobile_home_navigation_friend
+    culture: ja_JP
+    caption: "[i:140]ﾏｲﾌﾚﾝﾄﾞ"
+  mobile_home_navigation_friend_en:
+    id: mobile_home_navigation_friend
+    culture: en
+    caption: "My Friends"
+
+  mobile_home_navigation_community_ja:
+    id: mobile_home_navigation_community
+    culture: ja_JP
+    caption: "[i:155]参加ｺﾐｭﾆﾃｨ"
+  mobile_home_navigation_community_en:
+    id: mobile_home_navigation_community
+    culture: en
+    caption: "Communities"
+
+  mobile_home_center_navigation_profile_ja:
+    id: mobile_home_center_navigation_profile
+    culture: ja_JP
+    caption: "[i:140]ﾌﾟﾛﾌｨｰﾙ"
+  mobile_home_center_navigation_profile_en:
+    id: mobile_home_center_navigation_profile
+    culture: en
+    caption: "Profile"

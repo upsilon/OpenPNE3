@@ -15,7 +15,7 @@
  * @subpackage routing
  * @author     Kousuke Ebihara <ebihara@tejimaya.com>
  */
-class opDynamicAclRoute extends sfDoctrineRoute
+class opDynamicAclRoute extends sfPropel15Route
 {
   protected
     $acl = null;

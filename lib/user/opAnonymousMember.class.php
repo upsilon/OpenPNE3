@@ -146,12 +146,12 @@ class opAnonymousMember extends Member
     return 'everyone';
   }
 
-  public function save(Doctrine_Connection $conn = null)
+  public function save(PropelPDO $con = null)
   {
     return false;
   }
 
-  public function delete(Doctrine_Connection $conn = null)
+  public function delete(PropelPDO $con = null)
   {
     return false;
   }

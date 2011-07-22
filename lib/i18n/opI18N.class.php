@@ -25,8 +25,8 @@ class opI18N extends sfI18N
     {
         $application = 'pc_frontend';
     }
-    $this->terms = Doctrine::getTable('SnsTerm');
-    $this->terms->configure($this->culture, $application);
+    opSnsTermAccess::configure($this->culture, $application);
+    $this->terms = new opSnsTermAccess();
   }
 
   public function generateApplicationMessages($dirs)

@@ -1,5 +1,7 @@
 <?php
 
+require_once dirname(__FILE__).'/../../plugins/sfPropel15Plugin/lib/vendor/propel-generator/lib/model/Behavior.php';
+
 /**
  * This file is part of the OpenPNE package.
  * (c) OpenPNE Project (http://www.openpne.jp/)
@@ -8,23 +10,32 @@
  * file and the NOTICE file that were distributed with this source code.
  */
 
-class opActivateBehavior extends Doctrine_Template
+class opActivateBehavior extends Behavior
 {
-  protected $_options = array(
+  protected $parameters = array(
     'name'    => 'is_active',
     'default' => false,
   );
 
   protected static $enabled = true;
 
-  public function setTableDefinition()
+  public function modifyTable()
   {
-    $this->hasColumn($this->_options['name'], 'boolean', 1, array('default' => $this->_options['default'], 'notnull' => true));
-    $this->index($this->_options['name'].'_INDEX', array(
-      'fields' => array($this->_options['name']),
-    ));
+    if (!$this->getTable()->containsColumn($this->getParameter('name')))
+    {
+      $this->getTable()->addColumn(array(
+        'name' => $this->getParameter('name'),
+        'type' => 'boolean',
+        'default' => $this->_options['default'],
+        'notnull' => true,
+      ));
 
-    $this->addListener(new opActivateListener());
+      /*
+      $this->index($this->_options['name'].'_INDEX', array(
+        'fields' => array($this->_options['name']),
+      ));
+      */
+    }
   }
 
   public static function enable()
@@ -40,5 +51,16 @@ class opActivateBehavior extends Doctrine_Template
   public static function getEnabled()
   {
     return self::$enabled;
+  }
+
+  public function preSelect($builder)
+  {
+    return <<<EOT
+if (opActivateBehavior::getEnabled()) {
+  \$c1 = \$criteria->getNewCriterion({$this->getColumnForParameter('name')->getConstantName()}, true);
+  \$c1->addOr(\$criteria->getNewCriterion({$this->getColumnForParameter('name')->getConstantName()}, null, Criteria::ISNULL));
+  \$criteria->add(\$c1);
+}
+EOT;
   }
 }

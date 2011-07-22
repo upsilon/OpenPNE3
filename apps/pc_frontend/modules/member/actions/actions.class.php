@@ -29,8 +29,8 @@ class memberActions extends opMemberAction
 
     $this->gadgetConfig = sfConfig::get('op_gadget_list');
 
-    $gadgets = Doctrine::getTable('Gadget')->retrieveGadgetsByTypesName('gadget');
-    $layout = Doctrine::getTable('SnsConfig')->get('home_layout', 'layoutA');
+    $gadgets = GadgetQuery::create()->findOneByType('gadget');
+    $layout = SnsConfigPeer::get('home_layout', 'layoutA');
     $this->setLayout($layout);
 
     switch ($layout)

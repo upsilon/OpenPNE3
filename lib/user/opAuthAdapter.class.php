@@ -94,7 +94,7 @@ abstract class opAuthAdapter
       return $setting['Default'];
     }
 
-    return Doctrine::getTable('SnsConfig')->get('op_auth_'.$this->authModeName.'_plugin_'.$name, $setting['Default']);
+    return SnsConfigPeer::get('op_auth_'.$this->authModeName.'_plugin_'.$name, $setting['Default']);
   }
 
   public function setAuthConfig($name, $value)

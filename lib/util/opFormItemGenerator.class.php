@@ -359,10 +359,8 @@ class opFormItemGenerator
       case 'checkbox':
       case 'select':
       case 'radio':
-        $q->andWhere($column.' = ?', $value);
-        break;
       case 'date':
-        $q->andWhere($column.' LIKE ?', $value);
+        $q->filterBy($column, $value);
         break;
       // doesn't allow searching
       case 'increased_input':
@@ -371,11 +369,11 @@ class opFormItemGenerator
         break;
       case 'country_select':
       case 'region_select':
-        $q->andWhere($column.' = ?', $value);
+        $q->filterBy($column, $value);
         break;
       // text and something else
       default:
-        $q->andWhere($column.' LIKE ?', '%'.$value.'%');
+        $q->filterBy($column, '%'.$value.'%');
     }
 
     return $q;
