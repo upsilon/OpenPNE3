@@ -128,43 +128,44 @@ class MemberProfile extends BaseMemberProfile implements opAccessControlRecordIn
 
   public function setValue($value)
   {
-    if ($this->getProfile()->isSingleSelect() && !$this->getProfile()->isPreset())
+    if ($this->getProfile() && $this->getProfile()->isSingleSelect() && !$this->getProfile()->isPreset())
     {
       $this->setProfileOptionId($value);
     }
     else
     {
-      $this->_set('value', $value);
+      parent::setValue($value);
     }
   }
 
   public function preSave($event)
   {
-    $modified = $this->getModified();
+    $modified = $this->getModifiedColumns();
     if (isset($modified['value_datetime']))
     {
-      $this->_set('value', $this->_get('value_datetime'));
+      $this->setValue($this->getValueDatetime());
     }
     elseif ('date' === $this->getFormType() && isset($modified['value']) && $this->getProfile()->isPreset())
     {
-      $this->_set('value_datetime', $this->_get('value'));
+      $this->setValueDatetime($this->getValue());
     }
+
+    return parent::preSave();
   }
 
   public function postSave($event)
   {
     if ($this->getTreeKey())
     {
-      $parent = $this->getTable()->find($this->getTreeKey());
+      $parent = MemberProfileQuery::create()->findPk($this->getTreeKey());
       if ($parent)
       {
-        $this->getNode()->insertAsLastChildOf($parent);
+        $this->insertAsLastChildOf($parent);
       }
     }
     else
     {
-      $tree = $this->getTable()->getTree();
-      $tree->createRoot($this);
+      $this->makeRoot();
     }
   }
 

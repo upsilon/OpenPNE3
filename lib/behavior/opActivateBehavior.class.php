@@ -23,18 +23,19 @@ class opActivateBehavior extends Behavior
   {
     if (!$this->getTable()->containsColumn($this->getParameter('name')))
     {
-      $this->getTable()->addColumn(array(
-        'name' => $this->getParameter('name'),
+      $columnName = $this->getParameter('name');
+      $table = $this->getTable();
+
+      $table->addColumn(array(
+        'name' => $columnName,
         'type' => 'boolean',
-        'default' => $this->_options['default'],
+        'default' => $this->getParameter('default'),
         'notnull' => true,
       ));
 
-      /*
-      $this->index($this->_options['name'].'_INDEX', array(
-        'fields' => array($this->_options['name']),
-      ));
-      */
+      $index = new Index($columnName.'_INDEX');
+      $index->addColumn($table->getColumn($columnName));
+      $table->addIndex($index);
     }
   }
 
