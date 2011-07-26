@@ -26,6 +26,10 @@ propel:
         onDelete: cascade
         references:
           - { local: member_id_to, foreign: id }
+      -
+        foreignTable: member
+        onDelete: cascade
+        references:
           - { local: member_id_from, foreign: id }
     _uniques:
       member_id_to_from_UNIQUE: [member_id_to, member_id_from]
