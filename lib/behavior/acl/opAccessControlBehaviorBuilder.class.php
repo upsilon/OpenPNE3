@@ -1,6 +1,6 @@
 <?php
 
-require_once dirname(__FILE__).'/../../plugins/sfPropel15Plugin/lib/vendor/propel-generator/lib/builder/om/OMBuilder.php';
+require_once dirname(__FILE__).'/../../../plugins/sfPropel15Plugin/lib/vendor/propel-generator/lib/builder/om/OMBuilder.php';
 
 class opAccessControlBehaviorBuilder extends OMBuilder
 {

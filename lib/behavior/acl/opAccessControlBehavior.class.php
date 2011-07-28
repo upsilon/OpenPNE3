@@ -1,6 +1,6 @@
 <?php
 
-require_once dirname(__FILE__).'/../../plugins/sfPropel15Plugin/lib/vendor/propel-generator/lib/model/Behavior.php';
+require_once dirname(__FILE__).'/../../../plugins/sfPropel15Plugin/lib/vendor/propel-generator/lib/model/Behavior.php';
 
 class opAccessControlBehavior extends Behavior
 {
