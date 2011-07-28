@@ -157,16 +157,15 @@ class GadgetPeer extends BaseGadgetPeer {
       ->orderBySortOrder()
       ->find();
 
-    return (0 === count($results)) ? $results : null;
+    return (0 === count($results)) ? null : $results;
   }
 
-  public function getGadgetsIds($type)
+  static public function getGadgetsIds($type)
   {
-    $_result = $this->createQuery()
-      ->select('id')
-      ->where('type = ?', $type)
-      ->orderBy('sort_order')
-      ->execute();
+    $_result = GadgetQuery::create()
+      ->filterByType($type)
+      ->orderBySortOrder()
+      ->find();
 
     $result = array();
 
@@ -178,58 +177,39 @@ class GadgetPeer extends BaseGadgetPeer {
     return $result;
   }
 
-  protected function getResults()
+  static protected function getResults()
   {
-    if (empty($this->results))
+    if (empty(self::$results))
     {
-      $this->results = array();
-      $objects = $this->createQuery()->orderBy('sort_order')->execute();
+      self::$results = array();
+      $objects = GadgetQuery::create()->orderBySortOrder()->find();
       foreach ($objects as $object)
       {
-        $this->results[$object->type][] = $object;
+        self::$results[$object->getType()][] = $object;
       }
     }
-    return $this->results;
+    return self::$results;
   }
 
-  public function getGadgetConfigListByType($type)
+  static public function getGadgetConfigListByType($type)
   {
-    if (isset($this->gadgetConfigList[$type]))
+    if (isset(self::$gadgetConfigList[$type]))
     {
-      return $this->gadgetConfigList[$type];
+      return self::$gadgetConfigList[$type];
     }
 
-    $configs = $this->getConfig();
+    $configs = self::getConfig();
     foreach ($configs as $key => $config)
     {
-      if (in_array($type, $this->getTypes($key)))
+      if (in_array($type, self::getTypes($key)))
       {
-        $resultConfig = $this->getGadgetConfig($key);
-        $this->gadgetConfigList[$type] = $resultConfig;
+        $resultConfig = self::getGadgetConfig($key);
+        self::$gadgetConfigList[$type] = $resultConfig;
         return $resultConfig;
       }
     }
 
-    $this->gadgetConfigList[$type] = array();
+    self::$gadgetConfigList[$type] = array();
     return array();
-  }
-
-  public function appendRoles(Zend_Acl $acl)
-  {
-    return $acl
-      ->addRole(new Zend_Acl_Role('anonymous'))
-      ->addRole(new Zend_Acl_Role('everyone'), 'anonymous');
-  }
-
-  public function appendRules(Zend_Acl $acl, $resource = null)
-  {
-    $acl->allow('everyone', $resource, 'view');
-
-    if (4 == $resource->getConfig('viewable_privilege'))
-    {
-      $acl->allow('anonymous', $resource, 'view');
-    }
-
-    return $acl;
   }
 } // GadgetPeer

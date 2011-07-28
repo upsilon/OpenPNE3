@@ -258,6 +258,8 @@ propel:
     type: { type: varchar(64), default: "", notnull: true, comment: "Gadget type" }
     name: { type: varchar(64), default: "", notnull: true, comment: "Gadget name" }
     sort_order: { type: integer, comment: "Order to sort" }
+    _propel_behaviors:
+      op_access_control:
     _indexes:
       sort_order_INDEX: [sort_order]
 
