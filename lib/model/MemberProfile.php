@@ -17,7 +17,7 @@
  *
  * @package    propel.generator.lib.model
  */
-class MemberProfile extends BaseMemberProfile implements opAccessControlRecordInterface {
+class MemberProfile extends BaseMemberProfile {
   public function __toString()
   {
     if ('date' !== $this->getFormType())
@@ -216,28 +216,5 @@ class MemberProfile extends BaseMemberProfile implements opAccessControlRecordIn
     }
 
     return $profile->getDefaultPublicFlag();
-  }
-
-  public function generateRoleId(Member $member)
-  {
-    $relation = Doctrine::getTable('MemberRelationship')->retrieveByFromAndTo($this->Member->id, $member->id);
-
-    if ($this->Member->id === $member->id)
-    {
-      return 'self';
-    }
-    elseif ($relation)
-    {
-      if ($relation->getIsAccessBlock())
-      {
-        return 'blocked';
-      }
-      elseif ($relation->getIsFriend())
-      {
-        return 'friend';
-      }
-    }
-
-    return 'everyone';
   }
 } // MemberProfile

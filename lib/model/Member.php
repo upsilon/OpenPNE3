@@ -17,7 +17,7 @@
  *
  * @package    propel.generator.lib.model
  */
-class Member extends BaseMember implements opAccessControlRecordInterface {
+class Member extends BaseMember {
   public function getProfiles($viewableCheck = false, $myMemberId = null)
   {
     if ($viewableCheck)
@@ -52,12 +52,10 @@ class Member extends BaseMember implements opAccessControlRecordInterface {
         return null;
       }
 
-/*
       if (!$profile->isAllowed($member, 'view'))
       {
         return null;
       }
-*/
     }
 
     return $profile;
@@ -325,26 +323,6 @@ class Member extends BaseMember implements opAccessControlRecordInterface {
     }
 
     return substr($hash, 0, (int)$length);
-  }
-
-  public function generateRoleId(Member $member)
-  {
-    $relation = Doctrine::getTable('MemberRelationship')->retrieveByFromAndTo($this->id, $member->id);
-
-    if ($this->id === $member->id)
-    {
-      return 'self';
-    }
-    elseif ($relation && $relation->getIsAccessBlock())
-    {
-      return 'blocked';
-    }
-    elseif ($member instanceof opAnonymousMember)
-    {
-      return 'anonymous';
-    }
-
-    return 'everyone';
   }
 
   public function generateRegisterToken()

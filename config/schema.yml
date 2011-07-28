@@ -1,10 +1,13 @@
 propel:
+  _attributes: { baseClass: opPropelRecord }
+
   member:
     name: { type: varchar(64), default: "", notnull: true, comment: "Nickname" }
     invite_member_id: { type: integer, comment: "Member id of the person who invited this member" }
     is_login_rejected: { type: boolean, notnull: true, default: false, comment: "Rejected member" }
     _propel_behaviors:
       op_activate:
+      op_access_control:
     _foreignKeys:
       -
         foreignTable: member
@@ -120,6 +123,7 @@ propel:
       nested_set:
         use_scope: true
         scope_column: tree_key
+      op_access_control:
     _foreignKeys:
       -
         foreignTable: member
