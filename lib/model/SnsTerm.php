@@ -66,6 +66,12 @@ class SnsTerm extends BaseSnsTerm {
     return $string;
   }
 
+  public function getCulture()
+  {
+    $culture = parent::getCulture();
+    return $culture === null ? sfPropel::getDefaultCulture() : $culture;
+  }
+
   public function __toString()
   {
     $value = $this->getValue();
