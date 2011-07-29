@@ -162,19 +162,11 @@ class GadgetPeer extends BaseGadgetPeer {
 
   static public function getGadgetsIds($type)
   {
-    $_result = GadgetQuery::create()
+    return GadgetQuery::create()
+      ->select('Id')
       ->filterByType($type)
       ->orderBySortOrder()
       ->find();
-
-    $result = array();
-
-    foreach ($_result as $value)
-    {
-      $result[] = $value->getId();
-    }
-
-    return $result;
   }
 
   static protected function getResults()

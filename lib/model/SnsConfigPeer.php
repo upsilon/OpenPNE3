@@ -20,8 +20,10 @@
 class SnsConfigPeer extends BaseSnsConfigPeer {
   static public function get($name, $default = null)
   {
-    $config = SnsConfigQuery::create()->findOneByName($name);
+    $value = SnsConfigQuery::create()
+      ->select('Value')
+      ->findOneByName($name);
 
-    return null === $config ? $default : $config->value;
+    return null === $value ? $default : $value;
   }
 } // SnsConfigPeer

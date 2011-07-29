@@ -97,9 +97,11 @@ class Member extends BaseMember {
 
   public function getConfig($configName, $default = null)
   {
-    $config = MemberConfigQuery::create()->findOneByNameAndMemberId($configName, $this->getId());
+    $value = MemberConfigQuery::create()
+      ->select('Value')
+      ->findOneByNameAndMemberId($configName, $this->getId());
 
-    return $config ? $config->getValue() : $default;
+    return $value ? $value : $default;
   }
 
   public function setConfig($configName, $value, $isDateTime = false)

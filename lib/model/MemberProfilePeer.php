@@ -101,7 +101,11 @@ class MemberProfilePeer extends BaseMemberProfilePeer {
 
   public function retrieveByMemberIdAndProfileName($memberId, $profileName)
   {
-    $profileId = ProfileQuery::create()->findOneByName($profileName)->getId();
+    $profileId = ProfileQuery::create()
+      ->select('Id')
+      ->filterByName($profileName)
+      ->findOne();
+
     if ($profileId)
     {
       return MemberProfileQuery::create()
@@ -267,16 +271,10 @@ class MemberProfilePeer extends BaseMemberProfilePeer {
       $ignores[] = MemberConfigPeer::generateNameValueHash('age_public_flag', $k);
     }
 
-    $rs = MemberConfigQuery::create()
-      ->select('member_id')
+    $ignoreMemberIds = MemberConfigQuery::create()
+      ->select('MemberId')
       ->filterByNameValueHash($ignores)
       ->find();
-
-    $ignoreMemberIds = array();
-    foreach ($rs as $r)
-    {
-      $ignoreMemberIds[] = $r->getMemberId();
-    }
 
     $ids = array_diff($ids, $ignoreMemberIds);
 
