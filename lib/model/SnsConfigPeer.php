@@ -18,11 +18,23 @@
  * @package    propel.generator.lib.model
  */
 class SnsConfigPeer extends BaseSnsConfigPeer {
+  static public function getAll()
+  {
+    static $configs = null;
+    if (null === $configs)
+    {
+      $configs = SnsConfigQuery::create()
+        ->find()
+        ->toKeyValue('Name', 'Value');
+    }
+
+    return $configs;
+  }
+
   static public function get($name, $default = null)
   {
-    $value = SnsConfigQuery::create()
-      ->select('Value')
-      ->findOneByName($name);
+    $configs = self::getAll();
+    $value = isset($configs[$name]) ? $configs[$name] : null;
 
     return null === $value ? $default : $value;
   }

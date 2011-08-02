@@ -21,7 +21,7 @@ class opSnsTermAccess implements ArrayAccess
 
   public function offsetExists($offset)
   {
-    return !is_null(SnsTermPeer::get($offset, self::$application, self::$culture));
+    return !is_null($this->offsetGet($offset));
   }
 
   public function offsetGet($offset)

@@ -18,6 +18,30 @@
  * @package    propel.generator.lib.model
  */
 class SnsTermPeer extends BaseSnsTermPeer {
+  static public function getAll($application = null, $culture = null)
+  {
+    static $terms = null;
+    if (null === $terms)
+    {
+      $query = SnsTermQuery::create();
+
+      if ($application)
+      {
+        $query->filterByApplication($application);
+      }
+
+      $results = self::doSelectWithI18n($query, $culture);
+
+      $terms = array();
+      foreach ($results as $term)
+      {
+        $terms[$term->getName()] = $term;
+      }
+    }
+
+    return $terms;
+  }
+
   static public function get($name, $application = null, $culture = null)
   {
     $fronting = false;
@@ -27,21 +51,8 @@ class SnsTermPeer extends BaseSnsTermPeer {
       $name = strtolower($name[0]).substr($name, 1);
     }
 
-    $query = SnsTermQuery::create()
-      ->filterByName($name);
-
-    if ($application)
-    {
-      $query->filterByApplication($application);
-    }
-
-    if ($culture)
-    {
-      $query->leftJoinSnsTermI18n();
-      $query->addJoinCondition('SnsTermI18n', 'SnsTermI18n.Culture = ?', $culture);
-    }
-
-    $result = $query->findOne();
+    $terms = self::getAll($application, $culture);
+    $result = isset($terms[$name]) ? $terms[$name] : null;
 
     if ($result && $fronting)
     {
