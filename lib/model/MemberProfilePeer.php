@@ -101,16 +101,16 @@ class MemberProfilePeer extends BaseMemberProfilePeer {
 
   public function retrieveByMemberIdAndProfileName($memberId, $profileName)
   {
-    $profileId = ProfileQuery::create()
-      ->select('Id')
-      ->filterByName($profileName)
-      ->findOne();
+    $query = ProfileQuery::create()->select('Id');
 
-    if ($profileId)
+    $cache = new opFunctionCache();
+    $profile = $cache->call(array($query, 'findOneByName'), array($profileName));
+
+    if ($profile)
     {
       return MemberProfileQuery::create()
         ->filterByMemberId($memberId)
-        ->filterByProfileId($profileId)
+        ->filterByProfile($profile)
         ->findOne();
     }
 

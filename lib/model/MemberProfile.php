@@ -209,7 +209,12 @@ class MemberProfile extends BaseMemberProfile {
 
   public function getPublicFlag()
   {
-    $profile = $this->getProfile();
+    $cache = new opFunctionCache();
+    $query = ProfileQuery::create();
+    $profile = $cache->call(array($query, 'findPk'), array($this->getProfileId()));
+
+    $this->setProfile($profile);
+
     if ($profile->getIsEditPublicFlag())
     {
       return $this->_data['public_flag'] ? $this->_data['public_flag'] : $profile->getDefaultPublicFlag();
