@@ -104,13 +104,13 @@ class MemberProfilePeer extends BaseMemberProfilePeer {
     $query = ProfileQuery::create()->select('Id');
 
     $cache = new opFunctionCache();
-    $profile = $cache->call(array($query, 'findOneByName'), array($profileName));
+    $profileId = $cache->call(array($query, 'findOneByName'), array($profileName));
 
-    if ($profile)
+    if ($profileId)
     {
       return MemberProfileQuery::create()
         ->filterByMemberId($memberId)
-        ->filterByProfile($profile)
+        ->filterByProfileId($profileId)
         ->findOne();
     }
 
