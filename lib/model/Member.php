@@ -184,6 +184,7 @@ class Member extends BaseMember {
   public function getImage()
   {
     $query = MemberImageQuery::create()
+      ->joinWith('MemberImage.File')
       ->filterByMemberId($this->getId())
       ->orderByIsPrimary(Criteria::DESC);
 
