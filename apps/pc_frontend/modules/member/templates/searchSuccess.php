@@ -12,7 +12,7 @@ op_include_form('searchMember', $filters, $options);
 <?php if ($pager->getNbResults()): ?>
 <?php
 $list = array();
-foreach ($pager->getResults() as $key => $member)
+foreach ($pager as $key => $member)
 {
   $list[$key] = array();
   $list[$key][__('%nickname%', array('%nickname%' => $op_term['nickname']->titleize()))] = $member->getName();

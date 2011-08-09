@@ -4,7 +4,7 @@
 <?php include_slot('pager') ?>
 
 <div class="block">
-<?php foreach ($options['pager']->getResults() as $key => $result): ?>
+<?php foreach ($options['pager'] as $key => $result): ?>
 <?php $list = $options->list->getRaw($key); ?>
 <div class="ditem"><div class="item"><table><tbody><tr>
 <td rowspan="<?php echo count($list) ?>" class="photo">
