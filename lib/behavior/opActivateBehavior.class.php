@@ -58,9 +58,7 @@ class opActivateBehavior extends Behavior
   {
     return <<<EOT
 if (opActivateBehavior::getEnabled()) {
-  \$c1 = \$criteria->getNewCriterion({$this->getColumnForParameter('name')->getConstantName()}, true);
-  \$c1->addOr(\$criteria->getNewCriterion({$this->getColumnForParameter('name')->getConstantName()}, null, Criteria::ISNULL));
-  \$criteria->add(\$c1);
+  \$criteria->add({$this->getColumnForParameter('name')->getConstantName()}, false, Criteria::NOT_EQUAL);
 }
 EOT;
   }
