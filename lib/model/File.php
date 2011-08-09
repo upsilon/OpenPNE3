@@ -18,5 +18,78 @@
  * @package    propel.generator.lib.model
  */
 class File extends BaseFile {
+  public function __toString()
+  {
+    return (string)$this->getName();
+  }
 
+  public function getImageFormat()
+  {
+    if (!$this->isImage())
+    {
+      return false;
+    }
+
+    $type = explode('/', $this->getType());
+    $result = $type[1];
+
+    if ($result === 'jpeg')
+    {
+      $result = 'jpg';
+    }
+
+    return $result;
+  }
+
+  public function isImage()
+  {
+    $type = $this->getType();
+    if ($type === 'image/jpeg'
+      || $type === 'image/gif'
+      || $type === 'image/png')
+    {
+      return true;
+    }
+
+    return false;
+  }
+
+  public function setFromValidatedFile(sfValidatedFile $obj)
+  {
+    $this->setType($obj->getType());
+    $this->setOriginalFilename($obj->getOriginalName());
+    $this->setName(strtr($obj->generateFilename(), '.', '_'));
+
+    $bin = new FileBin();
+    $bin->setBin(file_get_contents($obj->getTempName()));
+    $this->setFileBin($bin);
+  }
+
+  public function save(PropelPDO $conn = null)
+  {
+    $this->setFilesize(strlen($this->FileBin->bin));
+
+    if ($this->isImage())
+    {
+      $class = sfImageHandler::getStorageClassName();
+      $this->setName(call_user_func(array($class, 'getFilenameToSave'), $this->getName()), $class);
+
+      $storage = call_user_func(array($class, 'create'), $this, $class);
+      $storage->saveBinary($this->getFileBin());
+    }
+
+    return parent::save($conn);
+  }
+
+  public function delete(PropelPDO $conn = null)
+  {
+    if ($this->isImage())
+    {
+      $class = sfImageHandler::getStorageClassName();
+      $storage = call_user_func(array($class, 'create'), $this, $class);
+      $storage->deleteBinary();
+    }
+
+    return parent::delete($conn);
+  }
 } // File

@@ -183,10 +183,13 @@ class Member extends BaseMember {
 
   public function getImage()
   {
-    return MemberImageQuery::create()
+    $query = MemberImageQuery::create()
       ->filterByMemberId($this->getId())
-      ->orderByIsPrimary(Criteria::DESC)
-      ->findOne();
+      ->orderByIsPrimary(Criteria::DESC);
+
+    $cache = new opFunctionCache();
+
+    return $cache->call(array($query, 'findOne'));
   }
 
   public function getImageFileName()
