@@ -61,6 +61,36 @@ class Profile extends BaseProfile {
   }
 
  /**
+  * Checks if the profile is multiple select.
+  *
+  * @return boolean
+  */
+  public function isMultipleSelect()
+  {
+    return (bool)(('date' === $this->getFormType() && !$this->isPreset()) || 'checkbox' === $this->getFormType());
+  }
+
+ /**
+  * Checks if the profile is single select.
+  *
+  * @return boolean
+  */
+  public function isSingleSelect()
+  {
+    return (bool)('radio' === $this->getFormType() || 'select' === $this->getFormType());
+  }
+
+ /**
+  * Checks if the profile is preset.
+  *
+  * @return boolean
+  */
+  public function isPreset()
+  {
+    return (0 === strpos($this->getName(), 'op_preset_'));
+  }
+
+ /**
   * get raw preset name
   *
   * @return string
@@ -97,15 +127,5 @@ class Profile extends BaseProfile {
     }
 
     return array();
-  }
-
- /**
-  * Checks if the profile is preset.
-  *
-  * @return boolean
-  */
-  public function isPreset()
-  {
-    return (0 === strpos($this->getName(), 'op_preset_'));
   }
 } // Profile

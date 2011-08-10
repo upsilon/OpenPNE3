@@ -26,7 +26,7 @@ class Gadget extends BaseGadget {
     {
       $maxSortOrder = 0;
 
-      $gadgets = Doctrine::getTable('Gadget')->retrieveByType($this->getType());
+      $gadgets = GadgetPeer::retrieveByType($this->getType());
       if ($gadgets)
       {
         $finalGadget = array_pop($gadgets);
