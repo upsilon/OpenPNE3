@@ -67,7 +67,7 @@ class sfImageStorageDefault
   static public function find($filename, $className = null)
   {
     $instance = self::createInstance($className);
-    $instance->file = Doctrine::getTable('File')->retrieveByFilename($filename);
+    $instance->file = FileQuery::create()->findOneByName($filename);
 
     if (!$instance->file->isImage())
     {
