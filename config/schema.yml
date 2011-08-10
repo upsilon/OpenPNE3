@@ -140,6 +140,8 @@ propel:
         onDelete: cascade
         references:
           - { local: profile_option_id, foreign: id }
+    _uniques:
+      member_profile_UNIQUE: [member_id, profile_id]
 #    _indexes:
 #      lft_INDEX: [lft]
 
