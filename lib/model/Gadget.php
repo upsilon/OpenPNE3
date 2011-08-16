@@ -20,7 +20,7 @@
 class Gadget extends BaseGadget {
   protected $list = null;
 
-  public function preSave($event)
+  public function preSave(PropelPDO $con = null)
   {
     if (!$this->getSortOrder())
     {
@@ -38,6 +38,8 @@ class Gadget extends BaseGadget {
 
       $this->setSortOrder($maxSortOrder + 10);
     }
+
+    return true;
   }
 
   protected function getGadgetConfigList()

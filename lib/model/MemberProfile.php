@@ -138,7 +138,7 @@ class MemberProfile extends BaseMemberProfile {
     }
   }
 
-  public function preSave($event)
+  public function preSave(PropelPDO $con = null)
   {
     $modified = $this->getModifiedColumns();
     if (isset($modified['value_datetime']))
@@ -153,7 +153,7 @@ class MemberProfile extends BaseMemberProfile {
     return parent::preSave();
   }
 
-  public function postSave($event)
+  public function postSave(PropelPDO $con = null)
   {
     if ($this->getTreeKey())
     {
