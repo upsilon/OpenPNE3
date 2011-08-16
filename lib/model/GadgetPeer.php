@@ -154,7 +154,6 @@ class GadgetPeer extends BaseGadgetPeer {
   {
     $results = GadgetQuery::create()
       ->filterByType($type)
-      ->orderBySortOrder()
       ->find();
 
     return (0 === count($results)) ? null : $results;
@@ -165,7 +164,6 @@ class GadgetPeer extends BaseGadgetPeer {
     return GadgetQuery::create()
       ->select('Id')
       ->filterByType($type)
-      ->orderBySortOrder()
       ->find();
   }
 
@@ -174,7 +172,7 @@ class GadgetPeer extends BaseGadgetPeer {
     if (empty(self::$results))
     {
       self::$results = array();
-      $objects = GadgetQuery::create()->orderBySortOrder()->find();
+      $objects = GadgetQuery::create()->find();
       foreach ($objects as $object)
       {
         self::$results[$object->getType()][] = $object;

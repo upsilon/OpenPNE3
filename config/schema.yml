@@ -87,21 +87,20 @@ propel:
     value_regexp: { type: longvarchar, comment: "Regular expression" }
     value_min: { type: varchar(32), comment: "Minimum value" }
     value_max: { type: varchar(32), comment: "Maximum value" }
-    sort_order: { type: integer, comment: "Order to sort" }
+    _propel_behaviors:
+      op_sort_order:
     _uniques:
       name_UNIQUE: [name]
 
   profile_i18n:
     caption: { type: longvarchar, notnull: true, comment: "Item name to show" }
     info: { type: longvarchar, comment: "Description" }
-    _propel_behaviors:
-      timestampable:
-        boolean: false
 
   profile_option:
     id: { type: integer, primary: true, autoincrement: true, comment: "Serial number" }
     profile_id: { type: integer, notnull: true, comment: "Profile id" }
-    sort_order: { type: integer, comment: "Order to sort" }
+    _propel_behaviors:
+      op_sort_order:
     _foreignKeys:
       -
         foreignTable: profile
@@ -248,7 +247,8 @@ propel:
     name: { type: varchar(64), default: "", notnull: true, comment: "Category name" }
     is_allow_member_community: { type: boolean, default: true, notnull: true, comment: "Member can create this category community" }
     tree_key: { type: integer, comment: "Nested tree key" }
-    sort_order: { type: integer, comment: "Order to sort" }
+    _propel_behaviors:
+      op_sort_order:
     _propel_behaviors:
       nested_set:
         use_scope: true
@@ -259,11 +259,9 @@ propel:
   gadget:
     type: { type: varchar(64), default: "", notnull: true, comment: "Gadget type" }
     name: { type: varchar(64), default: "", notnull: true, comment: "Gadget name" }
-    sort_order: { type: integer, comment: "Order to sort" }
     _propel_behaviors:
       op_access_control:
-    _indexes:
-      sort_order_INDEX: [sort_order]
+      op_sort_order:
 
   gadget_config:
     name: { type: varchar(64), default: "", notnull: true, comment: "Configuration name" }
@@ -280,9 +278,10 @@ propel:
     id: { type: integer, primary: true, autoincrement: true, comment: "Serial number" }
     type: { type: varchar(64), default: "", notnull: true, comment: "Navigation type" }
     uri: { type: longvarchar, notnull: true, comment: "Linked page''s URI" }
-    sort_order: { type: integer, comment: "Order to sort" }
+    _propel_behaviors:
+      op_sort_order:
     _indexes:
-      type_sort_order_INDEX: [type, sort_order]
+      type_INDEX: [type]
 
   navigation_i18n:
     caption: { type: longvarchar, notnull: true, comment: "Description" }

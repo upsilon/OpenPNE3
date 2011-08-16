@@ -21,8 +21,7 @@ class NavigationPeer extends BaseNavigationPeer {
   static public function getNavigations($type)
   {
     $query = NavigationQuery::create()
-      ->filterByType($type)
-      ->orderBySortOrder();
+      ->filterByType($type);
 
     return self::doSelectWithI18n($query);
   }

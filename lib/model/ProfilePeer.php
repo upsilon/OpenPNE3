@@ -66,8 +66,7 @@ class ProfilePeer extends BaseProfilePeer {
   static public function retrieveByIsDispSearch()
   {
     $query = ProfileQuery::create()
-      ->filterByIsDispSearch(true)
-      ->orderBySortOrder();
+      ->filterByIsDispSearch(true);
 
     return self::doSelectWithI18n($query);
   }
