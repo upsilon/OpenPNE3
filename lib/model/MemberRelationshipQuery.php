@@ -18,5 +18,10 @@
  * @package    propel.generator.lib.model
  */
 class MemberRelationshipQuery extends BaseMemberRelationshipQuery {
-
+  public function findOneByFromAndTo($memberIdFrom, $memberIdTo)
+  {
+    return $this->filterByMemberIdFrom($memberIdFrom)
+      ->filterByMemberIdTo($memberIdTo)
+      ->findOne();
+  }
 } // MemberRelationshipQuery

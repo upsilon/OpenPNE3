@@ -29,7 +29,7 @@ abstract class opMemberAction extends sfActions
 
     $this->id = $this->getRequestParameter('id', $this->getUser()->getMemberId());
 
-    $this->relation = MemberRelationshipQuery::create()->findOneByMemberIdFromAndMemberIdTo($this->getUser()->getMemberId(), $this->id);
+    $this->relation = MemberRelationshipQuery::create()->findOneByFromAndTo($this->getUser()->getMemberId(), $this->id);
     if (!$this->relation)
     {
       $this->relation = new MemberRelationship();

@@ -26,7 +26,7 @@ class MemberProfileAcl
 
   static public function generateRoleId(MemberProfile $record, Member $viewer)
   {
-    $relation = MemberRelationshipQuery::create()->findOneByMemberIdFromAndMemberIdTo($record->getMemberId(), $viewer->getId());
+    $relation = MemberRelationshipQuery::create()->findOneByFromAndTo($record->getMemberId(), $viewer->getId());
 
     if ($record->getMemberId() === $viewer->getId())
     {
