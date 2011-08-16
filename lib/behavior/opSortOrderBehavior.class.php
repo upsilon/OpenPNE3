@@ -29,7 +29,7 @@ class opSortOrderBehavior extends Behavior
       $table->addColumn(array(
         'name' => $columnName,
         'type' => 'integer',
-        'required' => true,
+        'required' => 'true',
       ));
 
       $index = new Index($columnName.'_INDEX'.self::$uniqueNameCount++);
