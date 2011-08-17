@@ -22,7 +22,7 @@ class Banner extends BaseBanner {
   {
     $bannerUseImage = BannerUseImageQuery::create()
       ->filterByBannerId($this->getId())
-      ->addAscendingOrderByColumn('random()')
+      ->addAscendingOrderByColumn('rand()')
       ->findOne();
 
     if (!$bannerUseImage)
