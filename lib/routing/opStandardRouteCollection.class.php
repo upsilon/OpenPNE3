@@ -15,7 +15,7 @@
  * @subpackage routing
  * @author     Kousuke Ebihara <ebihara@tejimaya.com>
  */
-class opStandardRouteCollection extends sfPropel15RouteCollection
+class opStandardRouteCollection extends sfPropelRouteCollection
 {
   public function __construct(array $options)
   {

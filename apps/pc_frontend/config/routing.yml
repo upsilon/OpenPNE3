@@ -18,7 +18,7 @@ member_profile_mine:
 
 obj_friend_unlink:
   url:     /friend/unlink/:id
-  class:   sfPropel15Route
+  class:   sfPropelRoute
   options: { model: Member, type: object }
   param:   { module: friend, action: unlink }
   requirements:
