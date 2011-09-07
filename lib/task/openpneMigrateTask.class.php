@@ -8,7 +8,7 @@
  * file and the NOTICE file that were distributed with this source code.
  */
 
-class openpneMigrateTask extends sfDoctrineBaseTask
+class openpneMigrateTask extends sfTask
 {
   protected $migrationException = null;
 

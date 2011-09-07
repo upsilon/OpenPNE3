@@ -15,7 +15,7 @@
  * @subpackage task
  * @author     Kousuke Ebihara <ebihara@php.net>
  */
-class openpneFixSessionDbTask extends sfDoctrineBaseTask
+class openpneFixSessionDbTask extends sfTask
 {
   protected function configure()
   {

@@ -29,13 +29,13 @@ class opProjectConfiguration extends sfProjectConfiguration
     {
       sfConfig::set('sf_task_name', get_class($subject));
     }
-    require_once dirname(__FILE__).'/../behavior/opActivateBehavior.class.php';
-    opActivateBehavior::disable();
+//    require_once dirname(__FILE__).'/../behavior/opActivateBehavior.class.php';
+//    opActivateBehavior::disable();
   }
 
   public function setup()
   {
-    $this->enableAllPluginsExcept(array('sfPropelPlugin'));
+    $this->enableAllPluginsExcept(array('sfPropelPlugin', 'sfDoctrinePlugin'));
     $this->setIncludePath();
 
     require_once dirname(__FILE__).'/../util/opToolkit.class.php';

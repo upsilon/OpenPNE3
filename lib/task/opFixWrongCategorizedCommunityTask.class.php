@@ -15,7 +15,7 @@
  * @subpackage task
  * @author     Kousuke Ebihara <ebihara@php.net>
  */
-class opFixWrongCategorizedCommunityTask extends sfDoctrineBaseTask
+class opFixWrongCategorizedCommunityTask extends sfTask
 {
   protected $dbManager;
 

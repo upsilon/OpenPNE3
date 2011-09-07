@@ -8,7 +8,7 @@
  * file and the NOTICE file that were distributed with this source code.
  */
 
-class openpneGenerateMigrationsTask extends sfDoctrineBaseTask
+class openpneGenerateMigrationsTask extends sfTask
 {
   protected function configure()
   {
