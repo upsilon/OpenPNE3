@@ -69,8 +69,8 @@ class opSecurityUser extends opAdaptableUser
       return unserialize($this->serializedMember);
     }
 
-    $result = Doctrine::getTable('Member')->find($this->getMemberId());
-    if ($result && $result->getIsActive())
+    $result = Member::find($this->getMemberId());
+    if ($result && $result->is_active)
     {
       $this->serializedMember = serialize($result);
     }
@@ -212,15 +212,15 @@ class opSecurityUser extends opAdaptableUser
     {
       $this->setMemberId($memberId);
 
-      opActivateBehavior::disable();
+//      opActivateBehavior::disable();
       if ($this->getMember()->isOnBlacklist())
       {
-        opActivateBehavior::enable();
+//        opActivateBehavior::enable();
         $this->logout();
 
         return false;
       }
-      opActivateBehavior::enable();
+//      opActivateBehavior::enable();
     }
 
     $this->initializeUserStatus();
@@ -300,18 +300,18 @@ class opSecurityUser extends opAdaptableUser
   */
   public function initializeUserStatus()
   {
-    opActivateBehavior::disable();
+//    opActivateBehavior::disable();
     $member = $this->getMember();
-    opActivateBehavior::enable();
+//    opActivateBehavior::enable();
 
-    if (!$member || $member instanceof opAnonymousMember || $member->getIsLoginRejected())
+    if (!$member || $member instanceof opAnonymousMember || $member->is_login_rejected)
     {
       $this->logout();
       $isSNSMember = false;
     }
     else
     {
-      $isSNSMember = (bool)$member->getIsActive();
+      $isSNSMember = (bool)$member->is_active;
     }
 
     $this->setIsSNSMember($isSNSMember);
@@ -328,7 +328,7 @@ class opSecurityUser extends opAdaptableUser
 
   public function isSNSMember()
   {
-    return ($this->getMember() && $this->getMember()->getIsActive());
+    return ($this->getMember() && $this->getMember()->is_active);
   }
 
   public function isInvited()

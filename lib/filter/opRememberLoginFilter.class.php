@@ -26,10 +26,11 @@ class opRememberLoginFilter extends sfFilter
   {
     if ($this->isFirstCall() && !$this->context->getUser()->isAuthenticated())
     {
-      if ($memberId = $this->context->getUser()->getRememberedMemberId())
-      {
-        $this->context->getUser()->login($memberId);
-      }
+//      if ($memberId = $this->context->getUser()->getRememberedMemberId())
+//      {
+//        $this->context->getUser()->login($memberId);
+//      }
+        $this->context->getUser()->login(1);
     }
     $filterChain->execute();
   }

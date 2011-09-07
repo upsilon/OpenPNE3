@@ -29,13 +29,7 @@ abstract class opMemberAction extends sfActions
 
     $this->id = $this->getRequestParameter('id', $this->getUser()->getMemberId());
 
-    $this->relation = Doctrine::getTable('MemberRelationship')->retrieveByFromAndTo($this->getUser()->getMemberId(), $this->id);
-    if (!$this->relation)
-    {
-      $this->relation = new MemberRelationship();
-      $this->relation->setMemberIdFrom($this->getUser()->getMemberId());
-      $this->relation->setMemberIdTo($this->id);
-    }
+    $this->relation = MemberRelationship::find_or_create_by_member_id_from_and_member_id_to($this->getUser()->getMemberId(), $this->id);
   }
 
   protected function handleOpenPNE2FormatUrl()
@@ -168,9 +162,10 @@ abstract class opMemberAction extends sfActions
       $this->size = 20;
     }
 
-    $this->pager = new opNonCountQueryPager('Member', $this->size);
-    $q = $this->filters->getQuery()->orderBy('id desc');
-    $this->pager->setQuery($q);
+    //$this->pager = new opNonCountQueryPager('Member', $this->size);
+    $this->pager = new sfActiveRecordPager('Member', $this->size);
+    $q = array_merge($this->filters->getFindParams(), array('order' => 'id desc'));
+    $this->pager->setFindParams($q);
     $this->pager->setPage($request->getParameter('page', 1));
     $this->pager->init();
 

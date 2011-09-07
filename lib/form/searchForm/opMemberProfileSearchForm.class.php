@@ -26,7 +26,7 @@ class opMemberProfileSearchForm extends BaseForm
 
   protected function getProfiles()
   {
-    return Doctrine::getTable('Profile')->retrieveByIsDispSearch();
+    return Profile::find_all_by_is_disp_search(true);
   }
 
   public function configure()
@@ -47,26 +47,28 @@ class opMemberProfileSearchForm extends BaseForm
 
     foreach ($this->getProfiles() as $profile)
     {
-      if (ProfileTable::PUBLIC_FLAG_PRIVATE == $profile->default_public_flag && !$profile->is_edit_public_flag)
+      if (Profile::PUBLIC_FLAG_PRIVATE == $profile->default_public_flag && !$profile->is_edit_public_flag)
       {
         continue;
       }
-
-      $profileI18n = $profile->Translation[$culture]->toArray();
 
       if ($profile->isPreset())
       {
         $config = $profile->getPresetConfig();
         $profileI18n['caption'] = sfContext::getInstance()->getI18n()->__($config['Caption']);
       }
+      else
+      {
+        $profileI18n = $profile->translation[$culture]->attributes();
+      }
 
-      $profileWithI18n = $profile->toArray() + $profileI18n;
+      $profileWithI18n = $profile->attributes() + $profileI18n;
 
       $widget = opFormItemGenerator::generateSearchWidget($profileWithI18n, array('' => '') + $profile->getOptionsArray());
       if ($widget)
       {
-        $widgets[self::$profileFieldPrefix.$profile->getName()] = $widget;
-        $validators[self::$profileFieldPrefix.$profile->getName()] = new sfValidatorPass();
+        $widgets[self::$profileFieldPrefix.$profile->name] = $widget;
+        $validators[self::$profileFieldPrefix.$profile->name] = new sfValidatorPass();
       }
     }
 
@@ -78,15 +80,16 @@ class opMemberProfileSearchForm extends BaseForm
     $this->widgetSchema->setNameFormat('member[%s]');
   }
 
-  protected function addIdColumnQuery(Doctrine_Query $query, $value)
+  protected function addIdColumnQuery(array &$query, $value)
   {
     if (!empty($value))
     {
-      $query->andWhere('id = ?', $value);
+      $query['conditions'][0][] = 'id = ?';
+      $query['conditions'][] = $value;
     }
   }
 
-  protected function addNameColumnQuery(Doctrine_Query $query, $value)
+  protected function addNameColumnQuery(array &$query, $value)
   {
     if (!empty($value))
     {
@@ -94,24 +97,26 @@ class opMemberProfileSearchForm extends BaseForm
       {
         foreach ($value as $v)
         {
-          $query->andWhereLike('name', $v);
+          $query['conditions'][0][] = 'name like ?';
+          $query['conditions'][] = $v;
         }
       }
       else
       {
         if (!empty($value))
         {
-          $query->andWhereLike('name', $values);
+          $query['conditions'][0][] = 'name like ?';
+          $query['conditions'][] = $values;
         }
       }
     }
   }
 
-  public function getQuery()
+  public function getFindParams()
   {
     $isWhere = false;
     $ids = null;
-    $q = Doctrine::getTable('Member')->createQuery();
+    $q = array();
 
     if ($this->getOption('is_use_id'))
     {
@@ -123,7 +128,7 @@ class opMemberProfileSearchForm extends BaseForm
     $profileValues = array();
     foreach ($this->getProfiles() as $profile)
     {
-      $key = $profile->getName();
+      $key = $profile->name;
       $value = $this->getValue(self::$profileFieldPrefix.$key);
 
       if (is_array($value))
@@ -148,7 +153,7 @@ class opMemberProfileSearchForm extends BaseForm
       }
     }
 
-    $ids = Doctrine::getTable('MemberProfile')->searchMemberIds($profileValues, $ids, $this->getOption('is_check_public_flag', true));
+//    $ids = Doctrine::getTable('MemberProfile')->searchMemberIds($profileValues, $ids, $this->getOption('is_check_public_flag', true));
 
     if ($isWhere)
     {

@@ -15,7 +15,7 @@ $list = array();
 foreach ($pager->getResults() as $key => $member)
 {
   $list[$key] = array();
-  $list[$key][__('%nickname%', array('%nickname%' => $op_term['nickname']->titleize()))] = $member->getName();
+  $list[$key][__('%nickname%', array('%nickname%' => $op_term['nickname']->titleize()))] = $member->name;
   $introduction = $member->getProfile('op_preset_self_introduction', true);
   if ($introduction)
   {

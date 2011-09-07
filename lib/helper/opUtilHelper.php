@@ -738,13 +738,13 @@ function op_mail_to($route, $params = array(), $name = '', $options = array(), $
 
 function op_banner($name)
 {
-  $banner = Doctrine::getTable('Banner')->findByName($name);
+  $banner = Banner::find_by_name($name);
   if (!$banner)
   {
     return false;
   }
 
-  if ($banner->getIsUseHtml())
+  if ($banner->is_use_html)
   {
     return $banner->getHtml();
   }
