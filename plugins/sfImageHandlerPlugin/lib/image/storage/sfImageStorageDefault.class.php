@@ -67,7 +67,7 @@ class sfImageStorageDefault
   static public function find($filename, $className = null)
   {
     $instance = self::createInstance($className);
-    $instance->file = Doctrine::getTable('File')->retrieveByFilename($filename);
+    $instance->file = File::find_by_name($filename);
 
     if (!$instance->file->isImage())
     {
@@ -93,7 +93,7 @@ class sfImageStorageDefault
 
   public function getBinary()
   {
-    return $this->file->getFileBin()->getBin();
+    return $this->file->file_bin->bin;
   }
 
   public function getFormat()

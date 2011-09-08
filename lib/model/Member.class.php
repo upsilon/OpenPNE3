@@ -125,7 +125,7 @@ class Member extends ActiveRecord\Model
     $image = $this->getImage();
     if ($image)
     {
-      return $image->getFile();
+      return $image->file;
     }
 
     return false;

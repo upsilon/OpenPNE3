@@ -78,7 +78,7 @@ function sf_image_path($filename, $options = array(), $absolute = false)
   }
   elseif (is_callable(array($filename, 'getType')))
   {
-    $f = str_replace('image/', '', $filename->getType());
+    $f = str_replace('image/', '', $filename->type);
   }
   else
   {
