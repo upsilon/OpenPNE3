@@ -1,0 +1,3 @@
+[submodule "plugins/sfActiveRecordPlugin"]
+	path = plugins/sfActiveRecordPlugin
+	url = git://github.com/upsilon/sfActiveRecordPlugin.git
