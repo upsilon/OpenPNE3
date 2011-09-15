@@ -29,13 +29,13 @@ class opProjectConfiguration extends sfProjectConfiguration
     {
       sfConfig::set('sf_task_name', get_class($subject));
     }
-    require_once dirname(__FILE__).'/../behavior/opActivateBehavior.class.php';
-    opActivateBehavior::disable();
+//    require_once dirname(__FILE__).'/../behavior/opActivateBehavior.class.php';
+//    opActivateBehavior::disable();
   }
 
   public function setup()
   {
-    $this->enableAllPluginsExcept(array('sfPropelPlugin'));
+    $this->enableAllPluginsExcept(array('sfDoctrinePlugin', 'sfPropelPlugin'));
     $this->setIncludePath();
 
     require_once dirname(__FILE__).'/../util/opToolkit.class.php';
@@ -87,6 +87,18 @@ class opProjectConfiguration extends sfProjectConfiguration
       dirname(__FILE__).'/../vendor/OAuth/',
       dirname(__FILE__).'/../vendor/simplepie/',
     ));
+
+    require_once sfConfig::get('sf_plugins_dir').'/sfDoctrine2Plugin/lib/vendor/doctrine/lib/vendor/doctrine-common/lib/Doctrine/Common/ClassLoader.php';
+
+    $classLoader = new \Doctrine\Common\ClassLoader('Gedmo');
+    $classLoader->setIncludePath(dirname(__FILE__).'/../vendor/doctrine_extensions/gedmo/lib');
+    $classLoader->register();
+  }
+
+  public function configureEntityManager(\Doctrine\ORM\EntityManager $em)
+  {
+    $evm = $em->getEventManager();
+    $evm->addEventSubscriber(new \Gedmo\Timestampable\TimestampableListener);
   }
 
   public function configureDoctrine($manager)
