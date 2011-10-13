@@ -3,13 +3,13 @@
 <?php foreach ($navs as $nav): ?>
 
 <?php if (isset($navId)): ?>
-<?php $uri = $nav->uri.'?id='.$navId; ?>
+<?php $uri = $nav->getUri().'?id='.$navId; ?>
 <?php else: ?>
-<?php $uri = $nav->uri; ?>
+<?php $uri = $nav->getUri(); ?>
 <?php endif; ?>
 
 <?php if (op_is_accessible_url($uri)): ?>
-<li id="<?php echo $nav->type ?>_<?php echo op_url_to_id($nav->uri) ?>"><?php echo link_to($nav->caption, $uri); ?></li>
+<li id="<?php echo $nav->getType() ?>_<?php echo op_url_to_id($nav->getUri()) ?>"><?php echo link_to($nav->getCaption(), $uri); ?></li>
 <?php endif; ?>
 
 <?php endforeach; ?>

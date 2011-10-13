@@ -93,12 +93,33 @@ class opProjectConfiguration extends sfProjectConfiguration
     $classLoader = new \Doctrine\Common\ClassLoader('Gedmo');
     $classLoader->setIncludePath(dirname(__FILE__).'/../vendor/doctrine_extensions/gedmo/lib');
     $classLoader->register();
+
+    $classLoader = new \Doctrine\Common\ClassLoader('Entity', dirname(__FILE__).'/../entities/doctrine');
+    $classLoader->register();
+    $classLoader = new \Doctrine\Common\ClassLoader('Gedmo', dirname(__FILE__).'/../entities/doctrine');
+    $classLoader->register();
+  }
+
+  public function configureDoctrineConnection(\Doctrine\ORM\Configuration $config)
+  {
+    $annotationDriver = $config->getMetadataDriverImpl();
+    $annotationDriver->addPaths(array(
+      dirname(__FILE__).'/../vendor/doctrine_extensions/gedmo/lib/Gedmo/Translatable/Entity',
+    ));
   }
 
   public function configureEntityManager(\Doctrine\ORM\EntityManager $em)
   {
     $evm = $em->getEventManager();
+
     $evm->addEventSubscriber(new \Gedmo\Timestampable\TimestampableListener);
+
+    $translationListener = new \Gedmo\Translatable\TranslationListener();
+    $this->dispatcher->connect('user.change_culture', function (sfEvent $event) use ($translationListener)
+    {
+      $translationListener->setTranslatableLocale($event['culture']);
+    });
+    $evm->addEventSubscriber($translationListener);
   }
 
   public function configureDoctrine($manager)

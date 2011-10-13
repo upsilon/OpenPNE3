@@ -29,7 +29,11 @@ abstract class opMemberAction extends sfActions
 
     $this->id = $this->getRequestParameter('id', $this->getUser()->getMemberId());
 
-    $this->relation = Doctrine::getTable('MemberRelationship')->retrieveByFromAndTo($this->getUser()->getMemberId(), $this->id);
+    $this->relation = $this->getEntityManager()->getRepository('MemberRelationship')->findOneBy(array(
+      'member_id_from' => $this->getUser()->getMemberId(),
+      'member_id_to' => $this->id
+    ));
+
     if (!$this->relation)
     {
       $this->relation = new MemberRelationship();
@@ -168,8 +172,8 @@ abstract class opMemberAction extends sfActions
       $this->size = 20;
     }
 
-    $this->pager = new opNonCountQueryPager('Member', $this->size);
-    $q = $this->filters->getQuery()->orderBy('id desc');
+    $this->pager = new sfDoctrinePager($this->getEntityManager(), 'Member', $this->size);
+    $q = $this->filters->getQuery()->orderBy('a.id', 'DESC');
     $this->pager->setQuery($q);
     $this->pager->setPage($request->getParameter('page', 1));
     $this->pager->init();

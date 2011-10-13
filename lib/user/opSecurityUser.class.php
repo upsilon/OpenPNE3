@@ -86,13 +86,13 @@ class opSecurityUser extends opAdaptableUser
     else
     {
       // You may get a inactive Member object here.
-      $member = Doctrine::getTable('Member')->find($memberId);
+      $member = sfContext::getInstance()->getEntityManager()->find('Member', $memberId);
       if (!$member)
       {
         return new opAnonymousMember();
       }
 
-      if ($member->getIsActive())
+//      if ($member->getIsActive())
       {
         $this->serializedMember = serialize($member);
       }
@@ -235,15 +235,15 @@ class opSecurityUser extends opAdaptableUser
     {
       $this->setMemberId($memberId);
 
-      opActivateBehavior::disable();
+//      opActivateBehavior::disable();
       if ($this->getMember()->isOnBlacklist())
       {
-        opActivateBehavior::enable();
+//        opActivateBehavior::enable();
         $this->logout();
 
         return false;
       }
-      opActivateBehavior::enable();
+//      opActivateBehavior::enable();
     }
 
     $this->initializeUserStatus();
@@ -323,9 +323,9 @@ class opSecurityUser extends opAdaptableUser
   */
   public function initializeUserStatus()
   {
-    opActivateBehavior::disable();
+//    opActivateBehavior::disable();
     $member = $this->getMember();
-    opActivateBehavior::enable();
+//    opActivateBehavior::enable();
 
     if ($member instanceof opAnonymousMember || $member->getIsLoginRejected())
     {
@@ -334,7 +334,7 @@ class opSecurityUser extends opAdaptableUser
     }
     else
     {
-      $isSNSMember = (bool)$member->getIsActive();
+      $isSNSMember = true; //(bool)$member->getIsActive();
     }
 
     $this->setIsSNSMember($isSNSMember);

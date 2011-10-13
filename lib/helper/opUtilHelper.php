@@ -738,7 +738,7 @@ function op_mail_to($route, $params = array(), $name = '', $options = array(), $
 
 function op_banner($name)
 {
-  $banner = Doctrine::getTable('Banner')->findByName($name);
+  $banner = sfContext::getInstance()->getEntityManager()->getRepository('Banner')->findOneBy(array('name' => $name));
   if (!$banner)
   {
     return false;

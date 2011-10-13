@@ -213,19 +213,19 @@ abstract class opApplicationConfiguration extends sfApplicationConfiguration
 
     $parameters['op_color']  = new opColorConfig();
 
-    $table = Doctrine::getTable('SnsTerm');
+    $repository = sfContext::getInstance()->getEntityManager()->getRepository('SnsTerm');
     $application = sfConfig::get('sf_app');
     if ($application == 'pc_backend')
     {
         $application = 'pc_frontend';
     }
-    $table->configure(sfContext::getInstance()->getUser()->getCulture(), $application);
-    if (!$table['member'])
+    $repository->configure(sfContext::getInstance()->getUser()->getCulture(), $application);
+    if (!$repository['member'])
     {
-      $table->configure('en', $application);
+      $repository->configure('en', $application);
     }
-    $parameters['op_term'] = $table;
-    sfOutputEscaper::markClassAsSafe('SnsTermTable');
+    $parameters['op_term'] = $repository;
+    sfOutputEscaper::markClassAsSafe('SnsTermRepository');
 
     return $parameters;
   }

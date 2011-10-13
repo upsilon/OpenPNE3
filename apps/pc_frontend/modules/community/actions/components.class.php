@@ -22,7 +22,7 @@ class communityComponents extends opCommunityComponents
     }
     $this->row = $this->gadget->getConfig('row');
     $this->col = $this->gadget->getConfig('col');
-    $this->crownIds = Doctrine::getTable('CommunityMember')->getCommunityIdsOfAdminByMemberId($this->member->getId());
-    $this->communities = Doctrine::getTable('Community')->retrievesByMemberId($this->member->getId(), $this->row * $this->col, true);
+    $this->crownIds = $this->getEntityManager()->getRepository('CommunityMember')->getCommunityIdsOfAdminByMemberId($this->member->getId());
+    $this->communities = $this->getEntityManager()->getRepository('Community')->retrievesByMemberId($this->member->getId(), $this->row * $this->col, true);
   }
 }

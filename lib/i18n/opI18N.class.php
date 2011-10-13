@@ -25,7 +25,7 @@ class opI18N extends sfI18N
     {
         $application = 'pc_frontend';
     }
-    $this->terms = Doctrine::getTable('SnsTerm');
+    $this->terms = sfContext::getInstance()->getEntityManager()->getRepository('SnsTerm');
     $this->terms->configure($this->culture, $application);
   }
 

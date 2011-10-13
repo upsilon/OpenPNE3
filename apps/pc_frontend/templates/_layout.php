@@ -6,7 +6,7 @@
 <?php include_title() ?>
 <?php include_stylesheets() ?>
 <?php include_javascripts() ?>
-<?php if (Doctrine::getTable('SnsConfig')->get('customizing_css')): ?>
+<?php if (opConfig::get('customizing_css')): ?>
 <link rel="stylesheet" type="text/css" href="<?php echo url_for('@customizing_css') ?>" />
 <?php endif; ?>
 <?php echo $op_config->get('pc_html_head') ?>

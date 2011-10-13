@@ -26,7 +26,8 @@ class opMemberProfileSearchForm extends BaseForm
 
   protected function getProfiles()
   {
-    return Doctrine::getTable('Profile')->retrieveByIsDispSearch();
+    return sfContext::getInstance()->getEntityManager()->getRepository('Profile')
+      ->findBy(array('is_disp_search' => true));
   }
 
   public function configure()
@@ -47,17 +48,25 @@ class opMemberProfileSearchForm extends BaseForm
 
     foreach ($this->getProfiles() as $profile)
     {
-      if (ProfileTable::PUBLIC_FLAG_PRIVATE == $profile->default_public_flag && !$profile->is_edit_public_flag)
+      if (Profile::PUBLIC_FLAG_PRIVATE == $profile->getDefaultPublicFlag() && !$profile->getIsEditPublicFlag())
       {
         continue;
       }
 
-      $profileI18n = $profile->Translation[$culture]->toArray();
-
       if ($profile->isPreset())
       {
         $config = $profile->getPresetConfig();
-        $profileI18n['caption'] = sfContext::getInstance()->getI18n()->__($config['Caption']);
+        $profileI18n = array(
+          'caption' => sfContext::getInstance()->getI18n()->__($config['Caption']),
+          'info' => null,
+        );
+      }
+      else
+      {
+        $profileI18n = array(
+          'caption' => $profile->getCaption(),
+          'info' => $profile->getInfo(),
+        );
       }
 
       $profileWithI18n = $profile->toArray() + $profileI18n;
@@ -78,15 +87,15 @@ class opMemberProfileSearchForm extends BaseForm
     $this->widgetSchema->setNameFormat('member[%s]');
   }
 
-  protected function addIdColumnQuery(Doctrine_Query $query, $value)
+  protected function addIdColumnQuery(\Doctrine\ORM\QueryBuilder $qb, $value)
   {
     if (!empty($value))
     {
-      $query->andWhere('id = ?', $value);
+      $qb->where($qb->expr()->eq('a.id', $value));
     }
   }
 
-  protected function addNameColumnQuery(Doctrine_Query $query, $value)
+  protected function addNameColumnQuery(\Doctrine\ORM\QueryBuilder $qb, $value)
   {
     if (!empty($value))
     {
@@ -94,14 +103,14 @@ class opMemberProfileSearchForm extends BaseForm
       {
         foreach ($value as $v)
         {
-          $query->andWhereLike('name', $v);
+          $qb->where($qb->expr()->like('a.name', $v));
         }
       }
       else
       {
         if (!empty($value))
         {
-          $query->andWhereLike('name', $values);
+          $qb->where($qb->expr()->like('a.name', $values));
         }
       }
     }
@@ -111,7 +120,9 @@ class opMemberProfileSearchForm extends BaseForm
   {
     $isWhere = false;
     $ids = null;
-    $q = Doctrine::getTable('Member')->createQuery();
+    $q = sfContext::getInstance()->getEntityManager()
+      ->getRepository('Member')->createQueryBuilder('a')
+      ->select('a');
 
     if ($this->getOption('is_use_id'))
     {
@@ -148,7 +159,8 @@ class opMemberProfileSearchForm extends BaseForm
       }
     }
 
-    $ids = Doctrine::getTable('MemberProfile')->searchMemberIds($profileValues, $ids, $this->getOption('is_check_public_flag', true));
+    $ids = sfContext::getInstance()->getEntityManager()
+      ->getRepository('MemberProfile')->searchMemberIds($profileValues, $ids, $this->getOption('is_check_public_flag', true));
 
     if ($isWhere)
     {
@@ -156,7 +168,7 @@ class opMemberProfileSearchForm extends BaseForm
       {
         $ids[] = 0;
       }
-      $q->whereIn('id', $ids);
+      $q->where($qb->expr()->in('a.id', $ids));
     }
 
     return $q;
