@@ -111,12 +111,12 @@ class Member extends BaseMember {
 
   public function getFriends($limit = null, $isRandom = false)
   {
-    return Doctrine::getTable('MemberRelationship')->getFriends($this->getId(), $limit, $isRandom);
+    return MemberRelationshipPeer::getFriends($this->getId(), $limit, $isRandom);
   }
 
   public function countFriends()
   {
-    return count(Doctrine::getTable('MemberRelationship')->getFriendMemberIds($this->getId()));
+    return count(MemberRelationshipPeer::getFriendMemberIds($this->getId()));
   }
 
   public function getNameAndCount($format = '%s (%d)')
@@ -145,14 +145,14 @@ class Member extends BaseMember {
     return $q->execute();
   }
 
-  public function countFriendPreTo(Doctrine_Query $q = null)
+  public function countFriendPreTo(MemberRelationshipQuery $q = null)
   {
     if (!$q)
     {
-      $q = Doctrine::getTable('MemberRelationship')->createQuery();
+      $q = MemberRelationshipQuery::create();
     }
-    $q->where('member_id_to = ?', $this->getId());
-    $q->addWhere('is_friend_pre = ?', true);
+    $q->filterByMemberIdTo($this->getId());
+    $q->filterByIsFriendPre(true);
 
     return $q->count();
   }
@@ -183,21 +183,20 @@ class Member extends BaseMember {
 
   public function getImage()
   {
-    $query = MemberImageQuery::create()
+    return MemberImageQuery::create()
       ->joinWith('MemberImage.File')
       ->filterByMemberId($this->getId())
-      ->orderByIsPrimary(Criteria::DESC);
-
-    $cache = new opFunctionCache();
-
-    return $cache->call(array($query, 'findOne'));
+      ->orderByIsPrimary(Criteria::DESC)
+      ->findOne();
   }
 
   public function getImageFileName()
   {
-    if ($this->getImage())
+    $image = $this->getImage();
+
+    if ($image)
     {
-      return $this->getImage()->getFile();
+      return $image->getFile();
     }
 
     return false;
@@ -218,7 +217,7 @@ class Member extends BaseMember {
     $uid = $this->getConfig('mobile_uid');
     if ($uid)
     {
-      return (bool)Doctrine::getTable('Blacklist')->retrieveByUid($uid);
+      return (bool)BlacklistPeer::retrieveByUid($uid);
     }
 
     return false;
@@ -350,9 +349,9 @@ class Member extends BaseMember {
 
     if (is_null($cache))
     {
-      $cache = Doctrine::getTable('CommunityMember')->createQuery()
-        ->where('member_id = ?', $this->getId())
-        ->andWhere('is_pre = ?', false)
+      $cache = CommunityMemberQuery::create()
+        ->filterByMemberId($this->getId())
+        ->filterByIsPre(false)
         ->count();
     }
 

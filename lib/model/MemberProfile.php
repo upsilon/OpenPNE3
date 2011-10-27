@@ -178,7 +178,7 @@ class MemberProfile extends BaseMemberProfile {
 
     switch ($this->getPublicFlag())
     {
-      case ProfileTable::PUBLIC_FLAG_FRIEND:
+      case ProfilePeer::PUBLIC_FLAG_FRIEND:
         $relation = Doctrine::getTable('MemberRelationship')->retrieveByFromAndTo($this->getMemberId(), $memberId);
         if  ($relation && $relation->isFriend())
         {
@@ -187,13 +187,13 @@ class MemberProfile extends BaseMemberProfile {
 
         return ($this->getMemberId() == $memberId);
 
-      case ProfileTable::PUBLIC_FLAG_PRIVATE:
+      case ProfilePeer::PUBLIC_FLAG_PRIVATE:
         return false;
 
-      case ProfileTable::PUBLIC_FLAG_SNS:
+      case ProfilePeer::PUBLIC_FLAG_SNS:
         return (bool)$memberId;
 
-      case ProfileTable::PUBLIC_FLAG_WEB:
+      case ProfilePeer::PUBLIC_FLAG_WEB:
         return ($this->Profile->is_public_web) ? true : (bool)$memberId;
     }
   }

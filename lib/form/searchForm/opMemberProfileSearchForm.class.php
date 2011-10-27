@@ -52,12 +52,14 @@ class opMemberProfileSearchForm extends BaseForm
         continue;
       }
 
-      $profileI18n = $profile->getCurrentProfileI18n($culture)->toArray();
-
       if ($profile->isPreset())
       {
         $config = $profile->getPresetConfig();
         $profileI18n['caption'] = sfContext::getInstance()->getI18n()->__($config['Caption']);
+      }
+      else
+      {
+        $profileI18n = $profile->getProfileI18ns()->getFirst()->toArray();
       }
 
       $profileWithI18n = $profile->toArray() + $profileI18n;

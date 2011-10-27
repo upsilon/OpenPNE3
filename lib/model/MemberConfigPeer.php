@@ -20,13 +20,10 @@
 class MemberConfigPeer extends BaseMemberConfigPeer {
   static public function setValue($memberId, $name, $value, $isDateTime = false)
   {
-    $config = MemberConfigQuery::create()->findOneByNameAndMemberId($name, $memberId);
-    if (!$config)
-    {
-      $config = new MemberConfig();
-      $config->setMemberId($memberId);
-      $config->setName($name);
-    }
+    $config = MemberConfigQuery::create()
+      ->filterByName($name)
+      ->filterByMemberId($memberId)
+      ->findOneOrCreate();
     if ($isDateTime)
     {
       $config->setValueDatetime($value);

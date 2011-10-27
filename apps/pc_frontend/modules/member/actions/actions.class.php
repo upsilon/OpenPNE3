@@ -29,7 +29,7 @@ class memberActions extends opMemberAction
 
     $this->gadgetConfig = sfConfig::get('op_gadget_list');
 
-    $gadgets = GadgetQuery::create()->findOneByType('gadget');
+    $gadgets = GadgetPeer::retrieveGadgetsByTypesName('gadget');
     $layout = SnsConfigPeer::get('home_layout', 'layoutA');
     $this->setLayout($layout);
 

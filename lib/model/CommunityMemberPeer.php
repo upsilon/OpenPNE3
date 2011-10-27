@@ -18,5 +18,52 @@
  * @package    propel.generator.lib.model
  */
 class CommunityMemberPeer extends BaseCommunityMemberPeer {
+  static public function getCommunityIdsOfAdminByMemberId($memberId)
+  {
+    $objects = CommunityMemberPositionQuery::create()->findByMemberIdAndName($memberId, 'admin');
 
+    $results = array();
+    foreach ($objects as $obj)
+    {
+      $results[] = $obj->getCommunityId();
+    }
+    return $results;
+  }
+
+  static public function getCommunityMembersPreQuery($memberId)
+  {
+    $adminCommunityIds = self::getCommunityIdsOfAdminByMemberId($memberId);
+
+    if (count($adminCommunityIds))
+    {
+      return CommunityMemberQuery::create()
+        ->filterByCommunityId($adminCommunityIds)
+        ->filterByIsPre(true);
+    }
+
+    return false;
+  }
+
+  static public function getCommunityMembersPre($memberId)
+  {
+    $q = self::getCommunityMembersPreQuery($memberId);
+
+    if (!$q)
+    {
+      return array();
+    }
+
+    return $q->execute();
+  }
+
+  static public function countCommunityMembersPre($memberId)
+  {
+    $q = self::getCommunityMembersPreQuery($memberId);
+    if (!$q)
+    {
+      return 0;
+    }
+
+    return $q->count();
+  }
 } // CommunityMemberPeer

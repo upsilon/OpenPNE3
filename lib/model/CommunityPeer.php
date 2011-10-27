@@ -18,5 +18,69 @@
  * @package    propel.generator.lib.model
  */
 class CommunityPeer extends BaseCommunityPeer {
+  static public function retrievesByMemberId($memberId, $limit = 5, $isRandom = false)
+  {
+    $communityMembers = CommunityMemberQuery::create()
+      ->select('CommunityId')
+      ->filterByIsPre(false)
+      ->filterByMemberId($memberId)
+      ->find();
 
+    $ids = array();
+    foreach ($communityMembers as $communityMember)
+    {
+      $ids[] = $communityMember[0];
+    }
+
+    if (empty($ids))
+    {
+      return;
+    }
+
+    $q = CommunityMemberQuery::create()
+      ->filterById($ids);
+
+    if (!is_null($limit))
+    {
+      $q->limit($limit);
+    }
+
+    if ($isRandom)
+    {
+//      $expr = new Doctrine_Expression('RANDOM()');
+//      $q->orderBy($expr);
+    }
+
+    return $q->find();
+  }
+
+  static public function getPositionRequestCommunitiesQuery($position = 'admin', $memberId = null)
+  {
+    if (null === $memberId)
+    {
+      $memberId = sfContext::getInstance()->getUser()->getMemberId();
+    }
+
+    $communityMemberPositions = CommunityMemberPositionQuery::create()->findByMemberIdAndName($memberId, $position.'_confirm');
+
+    if (!$communityMemberPositions || !count($communityMemberPositions))
+    {
+      return null;
+    }
+
+    return CommunityQuery::create()
+      ->filterById(array_values($communityMemberPositions->toKeyValueArray('id', 'community_id')));
+  }
+
+  static public function getPositionRequestCommunities($position = 'admin', $memberId = null)
+  {
+    $q = self::getPositionRequestCommunitiesQuery($position, $memberId);
+    return $q ? $q->execute() : null;
+  }
+
+  static public function countPositionRequestCommunities($position = 'admin', $memberId = null)
+  {
+    $q = self::getPositionRequestCommunitiesQuery($position, $memberId);
+    return $q ? $q->count() : null;
+  }
 } // CommunityPeer

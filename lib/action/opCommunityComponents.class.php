@@ -22,17 +22,17 @@ abstract class opCommunityComponents extends sfComponents
   {
     $memberId = sfContext::getInstance()->getUser()->getMemberId();
 
-    $this->communityMembersCount = Doctrine::getTable('CommunityMember')->countCommunityMembersPre($memberId);
+    $this->communityMembersCount = CommunityMemberPeer::countCommunityMembersPre($memberId);
   }
 
   public function executeCautionAboutChangeAdminRequest()
   {
-    $this->communityCount = Doctrine::getTable('Community')->countPositionRequestCommunities('admin');
+    $this->communityCount = CommunityPeer::countPositionRequestCommunities('admin');
   }
 
   public function executeCautionAboutSubAdminRequest()
   {
-    $this->communityCount = Doctrine::getTable('Community')->countPositionRequestCommunities('sub_admin');
+    $this->communityCount = CommunityPeer::countPositionRequestCommunities('sub_admin');
   }
 
 }

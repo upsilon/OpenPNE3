@@ -81,7 +81,7 @@ class MemberProfilePeer extends BaseMemberProfilePeer {
       $myMemberId = sfContext::getInstance()->getUser()->getMemberId();
     }
 
-    $profile = $this->retrieveByMemberIdAndProfileName($memberId, $profileName);
+    $profile = self::retrieveByMemberIdAndProfileName($memberId, $profileName);
 
     if ($profile && $profile->isViewable($myMemberId))
     {
