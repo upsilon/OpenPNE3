@@ -9,13 +9,13 @@
  */
 
 /**
- * opAccessControlRecordInterface
+ * opAccessControlEntityInterface
  *
  * @package    OpenPNE
  * @subpackage util
  * @author     Kousuke Ebihara <ebihara@tejimaya.com>
  */
-interface opAccessControlRecordInterface
+interface opAccessControlEntityInterface
 {
  /**
   * Generates and returns role ID that is specified the instance of Zend_Acl_Role.

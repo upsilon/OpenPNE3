@@ -4,7 +4,7 @@
  * @Entity(repositoryClass="GadgetRepository")
  * @Table(name="gadget")
  */
-class Gadget
+class Gadget extends opDoctrineEntity implements opAccessControlEntityInterface
 {
   /**
    * @var integer $id
@@ -68,7 +68,7 @@ class Gadget
   {
     if (null === $this->list)
     {
-      $this->list = sfContext::getInstance()->getEntityManager()->getRepository('Gadget')->getGadgetConfigListByType($this->type);
+      $this->list = $this->getRepository()->getGadgetConfigListByType($this->type);
     }
     return $this->list;
   }
@@ -110,7 +110,7 @@ class Gadget
     }
 
     $member = sfContext::getInstance()->getUser()->getMember();
-return true;
+
     $isEnabled = $this->isAllowed($member, 'view');
 
     return $isEnabled;
@@ -131,5 +131,15 @@ return true;
     }
 
     return $result;
+  }
+
+  public function generateRoleId(Member $member)
+  {
+    if ($member instanceof opAnonymousMember)
+    {
+      return 'anonymous';
+    }
+
+    return 'everyone';
   }
 }

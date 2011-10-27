@@ -4,7 +4,7 @@
  * @Entity(repositoryClass="MemberRepository")
  * @Table(name="member")
  */
-class Member
+class Member extends opDoctrineEntity
 {
   /**
    * @var integer $id
@@ -63,7 +63,7 @@ class Member
   private $configs;
 
   /**
-   * @OneToMany(targetEntity="MemberProfile", mappedBy="member", cascade={"persist", "remove"}, indexBy="id")
+   * @OneToMany(targetEntity="MemberProfile", mappedBy="member", cascade={"persist", "remove"}, indexBy="profile_id")
    */
   private $profiles;
 
@@ -103,7 +103,7 @@ class Member
   {
     if (!$q)
     {
-      $q = sfContext::getInstance()->getEntityManager()->getRepository('MemberRelationship')->createQueryBuilder('mr');
+      $q = $this->getEntityManager()->getRepository('MemberRelationship')->createQueryBuilder('mr');
     }
 
     $q
@@ -118,7 +118,7 @@ class Member
   {
     if (!$q)
     {
-      $q = sfContext::getInstance()->getEntityManager()->getRepository('MemberRelationship')->createQueryBuilder();
+      $q = $this->getEntityManager()->getRepository('MemberRelationship')->createQueryBuilder();
     }
 
     $q
@@ -147,10 +147,8 @@ class Member
 
   public function getProfile($profileName, $viewableCheck = false, $myMemberId = null)
   {
-    $profileId = sfContext::getInstance()->getEntityManager()->getRepository('Profile')->getIdByName($profileName);
-    return $this->profiles[$profileId];
-
-    $profile = Doctrine::getTable('MemberProfile')->retrieveByMemberIdAndProfileName($this->getId(), $profileName);
+    $profileId = $this->getEntityManager()->getRepository('Profile')->getIdByName($profileName);
+    $profile = $this->profiles[$profileId];
     if (!$profile)
     {
       return null;
@@ -201,17 +199,17 @@ class Member
     }
 
     $config->setValue($value, $isDateTime);
-    sfContext::getInstance()->getEntityManager()->persist($config);
+    $this->getEntityManager()->persist($config);
   }
 
   public function getFriends($limit = null, $isRandom = false)
   {
-    return sfContext::getInstance()->getEntityManager()->getRepository('MemberRelationship')->getFriends($this->getId(), $limit, $isRandom);
+    return $this->getEntityManager()->getRepository('MemberRelationship')->getFriends($this->getId(), $limit, $isRandom);
   }
 
   public function countFriends()
   {
-    return count(sfContext::getInstance()->getEntityManager()->getRepository('MemberRelationship')->getFriendMemberIds($this->getId()));
+    return count($this->getEntityManager()->getRepository('MemberRelationship')->getFriendMemberIds($this->getId()));
   }
 
   public function getNameAndCount($format = '%s (%d)')
@@ -250,7 +248,7 @@ class Member
 
     if (is_null($cache))
     {
-      $qb = sfContext::getInstance()->getEntityManager()->getRepository('CommunityMember')->createQueryBuilder('cm');
+      $qb = $this->getEntityManager()->getRepository('CommunityMember')->createQueryBuilder('cm');
       $cache = $qb
         ->select('COUNT(cm)')
         ->where($qb->expr()->eq('cm.member_id', $this->getId()))

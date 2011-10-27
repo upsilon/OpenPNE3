@@ -9,13 +9,13 @@
  */
 
 /**
- * opAccessControlDoctrineTable
+ * opAccessControlDoctrineRepository
  *
  * @package    OpenPNE
  * @subpackage util
  * @author     Kousuke Ebihara <ebihara@tejimaya.com>
  */
-abstract class opAccessControlDoctrineTable extends Doctrine_Table
+abstract class opAccessControlDoctrineRepository extends \Doctrine\ORM\EntityRepository
 {
   protected $acl = null;
 

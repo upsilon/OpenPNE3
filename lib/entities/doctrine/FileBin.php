@@ -16,6 +16,13 @@ class FileBin extends \sfDoctrineActiveEntity
   private $file_id;
 
   /**
+   * @var string $bin
+   *
+   * @Column(type="text")
+   */
+  private $bin;
+
+  /**
    * @OneToOne(targetEntity="File", inversedBy="file_bin", cascade={"persist","remove"})
    * @JoinColumn(name="file_id", referencedColumnName="id")
    */

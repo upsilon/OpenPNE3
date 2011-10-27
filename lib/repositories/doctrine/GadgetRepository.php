@@ -1,6 +1,6 @@
 <?php
 
-class GadgetRepository extends \Doctrine\ORM\EntityRepository
+class GadgetRepository extends opAccessControlDoctrineRepository
 {
   protected
     $results,
@@ -194,5 +194,24 @@ class GadgetRepository extends \Doctrine\ORM\EntityRepository
 
     $this->gadgetConfigList[$type] = array();
     return array();
+  }
+
+  public function appendRoles(Zend_Acl $acl)
+  {
+    return $acl
+      ->addRole(new Zend_Acl_Role('anonymous'))
+      ->addRole(new Zend_Acl_Role('everyone'), 'anonymous');
+  }
+
+  public function appendRules(Zend_Acl $acl, $resource = null)
+  {
+    $acl->allow('everyone', $resource, 'view');
+
+    if (4 == $resource->getConfig('viewable_privilege'))
+    {
+      $acl->allow('anonymous', $resource, 'view');
+    }
+
+    return $acl;
   }
 }

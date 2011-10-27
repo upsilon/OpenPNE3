@@ -1,6 +1,5 @@
 <?php
-
-class MemberProfileRepository extends \Doctrine\ORM\EntityRepository
+class MemberProfileRepository extends opAccessControlDoctrineRepository
 {
   public function getProfileListByMemberId($memberId)
   {
@@ -69,7 +68,7 @@ class MemberProfileRepository extends \Doctrine\ORM\EntityRepository
 
     $profile = $this->retrieveByMemberIdAndProfileName($memberId, $profileName);
 
-//    if ($profile && $profile->isViewable($myMemberId))
+    if ($profile && $profile->isViewable($myMemberId))
     {
       return $profile;
     }
@@ -362,5 +361,44 @@ class MemberProfileRepository extends \Doctrine\ORM\EntityRepository
       $childProfile->getNode()->insertAsLastChildOf($parent);
       $childProfile->save();
     }
+  }
+
+  public function appendRoles(Zend_Acl $acl)
+  {
+    return $acl
+      ->addRole(new Zend_Acl_Role('everyone'))
+      ->addRole(new Zend_Acl_Role('friend'), 'everyone')
+      ->addRole(new Zend_Acl_Role('self'), 'friend')
+      ->addRole(new Zend_Acl_Role('blocked'));
+  }
+
+  public function appendRules(Zend_Acl $acl, $resource = null)
+  {
+    $assertion = new opMemberProfilePublicFlagAssertion();
+
+    return $acl
+      ->allow('everyone', $resource, 'view', $assertion)
+      ->allow('friend', $resource, 'view', $assertion)
+      ->allow('self', $resource, 'view', $assertion)
+      ->allow('self', $resource, 'edit')
+      ->deny('blocked');
+  }
+}
+
+class opMemberProfilePublicFlagAssertion implements Zend_Acl_Assert_Interface
+{
+  public function assert(Zend_Acl $acl, Zend_Acl_Role_Interface $role = null, Zend_Acl_Resource_Interface $resource = null, $privilege = null)
+  {
+    if (Profile::PUBLIC_FLAG_FRIEND == $resource->getPublicFlag())
+    {
+      return ('self' === $role->getRoleId() || 'friend' === $role->getRoleId());
+    }
+
+    if (Profile::PUBLIC_FLAG_PRIVATE == $resource->getPublicFlag())
+    {
+      return ('self' === $role->getRoleId());
+    }
+
+    return true;
   }
 }

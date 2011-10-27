@@ -4,7 +4,7 @@
  * @Entity
  * @Table(name="member_config")
  */
-class MemberConfig
+class MemberConfig extends opDoctrineEntity
 {
   /**
    * @var integer $id

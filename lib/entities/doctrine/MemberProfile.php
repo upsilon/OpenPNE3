@@ -4,7 +4,7 @@
  * @Entity(repositoryClass="MemberProfileRepository")
  * @Table(name="member_profile")
  */
-class MemberProfile
+class MemberProfile extends opDoctrineEntity implements opAccessControlEntityInterface
 {
   /**
    * @var integer $id
@@ -103,6 +103,11 @@ class MemberProfile
     $this->value_datetime = $value_datetime;
   }
 
+  public function getPublicFlag()
+  {
+    return $this->public_flag;
+  }
+
   public function getMember()
   {
     return $this->member;
@@ -116,5 +121,58 @@ class MemberProfile
   public function __toString()
   {
     return (string)$this->value;
+  }
+
+  public function isViewable($memberId = null)
+  {
+    if (is_null($memberId))
+    {
+      $memberId = sfContext::getInstance()->getUser()->getMemberId();
+    }
+
+    switch ($this->getPublicFlag())
+    {
+      case Profile::PUBLIC_FLAG_FRIEND:
+        $relation = $this->getEntityManager()->getRepository('MemberRelationship')->retrieveByFromAndTo($this->getMemberId(), $memberId);
+        if  ($relation && $relation->isFriend())
+        {
+          return true;
+        }
+
+        return ($this->getMemberId() == $memberId);
+
+      case Profile::PUBLIC_FLAG_PRIVATE:
+        return false;
+
+      case Profile::PUBLIC_FLAG_SNS:
+        return (bool)$memberId;
+
+      case Profile::PUBLIC_FLAG_WEB:
+        return ($this->Profile->is_public_web) ? true : (bool)$memberId;
+    }
+  }
+
+  public function generateRoleId(Member $member)
+  {
+    $relation = $this->getEntityManager()->getRepository('MemberRelationship')
+      ->findOneBy(array('member_id_from' => $this->getMember()->getId(), 'member_id_to' => $member->getId()));
+
+    if ($this->getMember()->getId() === $member->getId())
+    {
+      return 'self';
+    }
+    elseif ($relation)
+    {
+      if ($relation->getIsAccessBlock())
+      {
+        return 'blocked';
+      }
+      elseif ($relation->getIsFriend())
+      {
+        return 'friend';
+      }
+    }
+
+    return 'everyone';
   }
 }

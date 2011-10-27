@@ -1,12 +1,10 @@
 <?php
 
-use Gedmo\Mapping\Annotation as Gedmo;
-
 /**
  * @Entity
  * @Table(name="member_image")
  */
-class MemberImage extends \sfDoctrineActiveEntity
+class MemberImage extends opDoctrineEntity
 {
   /**
    * @var integer $id

@@ -4,7 +4,7 @@
  * @Entity(repositoryClass="MemberRelationshipRepository")
  * @Table(name="member_relationship")
  */
-class MemberRelationship
+class MemberRelationship extends opDoctrineEntity
 {
   /**
    * @var integer $id
