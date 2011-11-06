@@ -181,6 +181,11 @@ image_storage: Default  # DB に画像バイナリを保存します (Store imag
 # Path to directory for storing images if a value of "image_storage" is "Filesystem" (Need to write permission from Web server)
 #image_storage_filesystem_master_dir: '/path/to/directory'
 
+# プロフィール画像に Gravatar を選択した場合のベース URL
+# Base URL of Gravatar when use Gravatar image for member image.
+gravatar_base: 'http://www.gravatar.com/avatar/'
+#gravatar_base: 'https://secure.gravatar.com/avatar/'
+
 ######################################
 # データベース (Database)
 ######################################

@@ -171,6 +171,18 @@ class Member extends BaseMember implements opAccessControlRecordInterface
     return $q->count();
   }
 
+  public function getGravatarUrl()
+  {
+    $address = $this->getEmailAddress(false);
+    if (null !== $address)
+    {
+      $hash = md5(strtolower(trim($address)));
+      return sfConfig::get('op_gravatar_base', 'http://www.gravatar.com/avatar/').$hash;
+    }
+
+    return null;
+  }
+
   public function getImage()
   {
     static $queryCacheHash;
@@ -195,6 +207,13 @@ class Member extends BaseMember implements opAccessControlRecordInterface
 
   public function getImageFileName()
   {
+    $gravatarUrl = $this->getGravatarUrl();
+    if ($gravatarUrl && $this->getConfig('enable_gravatar') &&
+      Doctrine::getTable('SnsConfig')->get('enable_gravatar'))
+    {
+      return $gravatarUrl;
+    }
+
     $image = $this->getImage();
     if ($image)
     {

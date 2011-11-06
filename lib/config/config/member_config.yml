@@ -84,6 +84,28 @@ mobileAddress:
     IsUnique:   true
     IsConfirm:  true
 
+gravatar:
+  _attributes:
+    caption: "Gravatar Configuration"
+    enable_pc:     true
+    eneble_mobile: true
+    depending_sns_config: enable_gravatar
+  enable_gravatar:
+    Name:       "enable_gravatar"
+    Caption:    "Use Gravatar as Member Icon"
+    Info:       "Gravatar image is preferred over uploaded photos."
+    FormType:   "radio"
+    ValueType:  "integer"
+    IsRegist:   false
+    IsConfig:   true
+    IsUnique:   false
+    IsRequired: true
+    IsConfirm:  false
+    Default:    0
+    Choices:
+      - "Not Use"
+      - "Use"
+
 password:
   _attributes:
     caption: "Password Configuration"

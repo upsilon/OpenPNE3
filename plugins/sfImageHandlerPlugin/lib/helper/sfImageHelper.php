@@ -68,6 +68,11 @@ function image_tag_sf_image($filename, $options = array())
 
 function sf_image_path($filename, $options = array(), $absolute = false)
 {
+  if (false !== strpos($filename, '://'))
+  {
+    return $filename;
+  }
+
   if (isset($options['f']))
   {
     $f = $options['f'];

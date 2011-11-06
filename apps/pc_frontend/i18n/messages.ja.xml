@@ -391,6 +391,14 @@
         <target>著作権や肖像権の侵害にあたる写真、暴力的・卑猥な写真、他のメンバーが見て不快に感じる写真の掲載は禁止しております。掲載はご自身の責任でお願いいたします。</target>
       </trans-unit>
       <trans-unit id="">
+        <source>If you would like to use Gravatar as your icon, </source>
+        <target>Gravatarの画像を写真に使用したい場合は、</target>
+      </trans-unit>
+      <trans-unit id="">
+        <source>turn on Gravatar in settings.</source>
+        <target>Gravatarを有効に設定してください。</target>
+      </trans-unit>
+      <trans-unit id="">
         <source>Details</source>
         <target>詳細を見る</target>
       </trans-unit>
@@ -473,6 +481,30 @@
       <trans-unit id="">
         <source>Password must be 6-12 characters.</source>
         <target>パスワードは6～12文字の半角英数で入力してください。</target>
+      </trans-unit>
+      <trans-unit id="">
+        <source>Gravatar Configuration</source>
+        <target>Gravatar設定</target>
+      </trans-unit>
+      <trans-unit id="">
+        <source>Use Gravatar as Member Icon</source>
+        <target>メンバー画像にGravatarを使用する</target>
+      </trans-unit>
+      <trans-unit id="">
+        <source>E-mail address is not set.</source>
+        <target>メールアドレスが設定されていません</target>
+      </trans-unit>
+      <trans-unit id="">
+        <source>Not Use</source>
+        <target>使用しない</target>
+      </trans-unit>
+      <trans-unit id="">
+        <source>Use</source>
+        <target>使用する</target>
+      </trans-unit>
+      <trans-unit id="">
+        <source>Gravatar image is preferred over uploaded photos.</source>
+        <target>Gravatarの画像はアップロードされている写真よりも優先されます。</target>
       </trans-unit>
       <trans-unit id="">
         <source>Access Block Configuration</source>
