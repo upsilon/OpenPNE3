@@ -48,6 +48,7 @@ class opActivityQueryBuilder
       'self' => false,
       'friend' => false,
       'sns' => false,
+      'mention' => false,
       'member' => false,
       'community' => false,
     );
@@ -70,6 +71,12 @@ class opActivityQueryBuilder
   public function includeSns()
   {
     $this->include['sns'] = true;
+    return $this;
+  }
+
+  public function includeMentions()
+  {
+    $this->include['mention'] = true;
     return $this;
   }
 
@@ -108,6 +115,11 @@ class opActivityQueryBuilder
     {
       $subQuery[] = $this->buildAllMemberQuery($query->createSubquery())
         ->addWhere('foreign_table IS NULL OR foreign_table <> "community"');
+    }
+
+    if ($this->include['mention'])
+    {
+      $subQuery[] = $this->buildMentionQuery($query->createSubquery());
     }
 
     if ($this->include['member'])
@@ -205,6 +217,20 @@ class opActivityQueryBuilder
       $subQuery = array_map(array($this, 'trimSubqueryWhere'), $subQuery);
       $query->andWhere(implode(' OR ', $subQuery));
     }
+
+    return $query;
+  }
+
+  protected function buildMentionQuery($query)
+  {
+    $friendQuery = $this->buildFriendQuery($query->createSubquery())
+      ->andWhereLike('a.template_param', '|'.$this->viewerId.'|');
+
+    $snsQuery = $this->buildAllMemberQuery($query->createSubquery())
+      ->andWhereLike('a.template_param', '|'.$this->viewerId.'|');
+
+    $subQuery = array_map(array($this, 'trimSubqueryWhere'), array($friendQuery, $snsQuery));
+    $query->andWhere(implode(' OR ', $subQuery));
 
     return $query;
   }
