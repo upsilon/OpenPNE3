@@ -49,6 +49,7 @@ class opActivityQueryBuilder
       'friend' => false,
       'sns' => false,
       'member' => false,
+      'community' => false,
     );
 
     return $this;
@@ -78,6 +79,12 @@ class opActivityQueryBuilder
     return $this;
   }
 
+  public function includeCommunity($community_id)
+  {
+    $this->include['community'] = $community_id;
+    return $this;
+  }
+
   public function buildQuery()
   {
     $query = $this->table->createQuery('a')
@@ -87,22 +94,31 @@ class opActivityQueryBuilder
 
     if ($this->include['self'])
     {
-      $subQuery[] = $this->buildSelfQuery($query->createSubquery());
+      $subQuery[] = $this->buildSelfQuery($query->createSubquery())
+        ->addWhere('foreign_table IS NULL OR foreign_table <> "community"');
     }
 
     if ($this->include['friend'])
     {
-      $subQuery[] = $this->buildFriendQuery($query->createSubquery(), $this->include['friend']);
+      $subQuery[] = $this->buildFriendQuery($query->createSubquery(), $this->include['friend'])
+        ->addWhere('foreign_table IS NULL OR foreign_table <> "community"');
     }
 
     if ($this->include['sns'])
     {
-      $subQuery[] = $this->buildAllMemberQuery($query->createSubquery());
+      $subQuery[] = $this->buildAllMemberQuery($query->createSubquery())
+        ->addWhere('foreign_table IS NULL OR foreign_table <> "community"');
     }
 
     if ($this->include['member'])
     {
-      $subQuery[] = $this->buildMemberQueryWithCheckRel($query->createSubquery(), $this->include['member']);
+      $subQuery[] = $this->buildMemberQueryWithCheckRel($query->createSubquery(), $this->include['member'])
+        ->addWhere('foreign_table IS NULL OR foreign_table <> "community"');
+    }
+
+    if ($this->include['community'])
+    {
+      $subQuery[] = $this->buildCommunityQuery($query->createSubquery(), $this->include['community']);
     }
 
     $subQuery = array_map(array($this, 'trimSubqueryWhere'), $subQuery);
@@ -191,6 +207,19 @@ class opActivityQueryBuilder
     }
 
     return $query;
+  }
+
+  protected function buildCommunityQuery($query, $community_id)
+  {
+    $communityMemberIds = Doctrine::getTable('CommunityMember')->createQuery()
+      ->select('DISTINCT member_id')
+      ->addWhere('community_id = ?', $community_id)
+      ->addWhere('is_pre = false')
+      ->execute(array(), Doctrine::HYDRATE_SINGLE_SCALAR);
+
+    return $this->buildMemberQueryWithCheckRel($query, $communityMemberIds)
+      ->addWhere('foreign_table = "community"')
+      ->addWhere('foreign_id = ?', $community_id);
   }
 
   protected function trimSubqueryWhere($subquery)
