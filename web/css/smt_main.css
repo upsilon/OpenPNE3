@@ -526,3 +526,21 @@ table td {
   float: right;
 }
 
+/*** QUnit ***/
+
+#qunit-testrunner-toolbar, #qunit-userAgent, #qunit-testresult {
+  padding: 0.2em 0.5em 0.2em 2.5em !important;
+  line-height: normal !important;
+}
+
+#qunit-tests ol {
+  margin-top: 0 !important;
+}
+
+#qunit-tests table {
+  margin: 0 !important;
+}
+
+#qunit-tests pre {
+  padding: 0;
+}

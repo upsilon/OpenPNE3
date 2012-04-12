@@ -130,4 +130,8 @@ class defaultComponents extends sfComponents
   public function executeLinkListBox()
   {
   }
+
+  public function executeSmtTestBox()
+  {
+  }
 }

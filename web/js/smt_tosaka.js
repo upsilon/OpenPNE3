@@ -5,7 +5,7 @@ $(document).ready(function(){
     $('#pushLoading').show();
     if('none' !== $('.ncform').css('display'))
     {
-      $.getJSON( openpne.apiBase + 'push/search.json?apiKey=' + openpne.apiKey, function(json){
+      $.getJSON( openpne.apiBase + 'push/search.json', { apiKey: openpne.apiKey }, function(json){
         if(json.status=='success')
         {
           $pushHtml = $("#pushListTemplate").tmpl(json.data);

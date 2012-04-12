@@ -18,3 +18,10 @@ freeArea:
       ValueType:  "text"
       IsRequired: false
 
+smtTest:
+  caption:
+    ja_JP: "UIテスト"
+  description:
+    ja_JP: "スマートフォン版UIのJavaScriptテストを実行します"
+  component: [default, smtTestBox]
+
