@@ -5,6 +5,7 @@ openpne["relativeUrlRoot"] = "'.$sf_request->getRelativeUrlRoot().'";
 <?php echo stylesheet_tag('qunit.css') ?>
 <?php echo javascript_include_tag('qunit.js') ?>
 <?php echo javascript_include_tag('jquery.mockjax.js') ?>
+<?php echo javascript_include_tag('smt_test.js') ?>
 
 <h2 id="qunit-banner"></h2>
 <div id="qunit-testrunner-toolbar"></div>
