@@ -83,4 +83,19 @@ class advancedActions extends sfActions
     }
     return sfView::NONE;
   }
+
+  public function executeAdminApiKey(sfWebRequest $request)
+  {
+    $this->forward404Unless(opConfig::get('enable_jsonapi'));
+
+    $this->apiKey = Doctrine::getTable('SnsConfig')->get('admin_api_key', null);
+
+    if (isset($request['reset_api_key']) && '1' === $request['reset_api_key'])
+    {
+      $request->checkCSRFProtection();
+
+      $this->apiKey = opToolkit::getRandom();
+      Doctrine::getTable('SnsConfig')->set('admin_api_key', $this->apiKey);
+    }
+  }
 }

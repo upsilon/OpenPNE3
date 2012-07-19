@@ -1433,6 +1433,26 @@
         <source>Advanced Settings</source>
         <target>上級者向け設定</target>
       </trans-unit>
+      <trans-unit id="">
+        <source>Admin API Key Configuration</source>
+        <target>管理者APIキー設定</target>
+      </trans-unit>
+      <trans-unit id="">
+        <source>Admin API Key</source>
+        <target>管理者APIキー</target>
+      </trans-unit>
+      <trans-unit id="">
+        <source>Admin API Key not yet generated.</source>
+        <target>管理者APIキーは生成されていません。</target>
+      </trans-unit>
+      <trans-unit id="">
+        <source>Generate Admin API Key</source>
+        <target>管理者APIキーを生成</target>
+      </trans-unit>
+      <trans-unit id="">
+        <source>Reset Admin API Key</source>
+        <target>管理者APIキーをリセット</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

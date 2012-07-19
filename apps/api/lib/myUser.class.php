@@ -27,18 +27,37 @@ class myUser extends sfBasicSecurityUser
       return null;
     }
 
-    $config = Doctrine::getTable('MemberConfig')->createQuery('c')
-      ->leftJoin('c.Member')
-      ->where('c.name = \'api_key\'')
-      ->where('c.value = ?', $apiKey)
-      ->fetchOne();
-
-    if (!$config)
+    if (!is_null(strpos($apiKey, '@')))
     {
-      return null;
-    }
+      // admin apiKey
+      list($memberId, $adminApiKey) = explode('@', $apiKey, 2);
 
-    return $config->getMember();
+      $config = Doctrine::getTable('SnsConfig')->createQuery('c')
+        ->where('c.name = \'admin_api_key\'')
+        ->where('c.value = ?', $adminApiKey)
+        ->fetchOne();
+
+      if (!$config)
+      {
+        // invalid apiKey
+        return null;
+      }
+
+      $member = Doctrine::getTable('Member')->find($memberId);
+
+      return $member ? $member : null;
+    }
+    else
+    {
+      // member apiKey
+      $config = Doctrine::getTable('MemberConfig')->createQuery('c')
+        ->leftJoin('c.Member')
+        ->where('c.name = \'api_key\'')
+        ->where('c.value = ?', $apiKey)
+        ->fetchOne();
+
+      return $config ? $config->getMember() : null;
+    }
   }
 
   public function getMember()

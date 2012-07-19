@@ -10,3 +10,6 @@ $caption = !empty($categoryAttributes[$category]['Caption']) ? $categoryAttribut
 <li><?php echo link_to(__($caption), 'advanced/config?category='.$category) ?></li>
 <?php endforeach; ?>
 <li><?php echo link_to(__('RichTextarea Configuration'), 'advanced/richTextarea') ?></li>
+<?php if (opConfig::get('enable_jsonapi')): ?>
+<li><?php echo link_to(__('Admin API Key Configuration'), 'advanced/adminApiKey') ?></li>
+<?php endif ?>

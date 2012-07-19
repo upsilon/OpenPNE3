@@ -335,6 +335,11 @@ table.skin td.submit {
   color: #ff0000;
 }
 
+div.apiKey {
+  padding: 10px;
+  font-weight: bold;
+}
+
 /* CLEAR FIX*/
 .clearfix:after {
   content: ".";
