@@ -19,23 +19,27 @@ class activityActions extends opJsonApiActions
 {
   public function executeSearch(sfWebRequest $request)
   {
-    $builder = opActivityQueryBuilder::create()
-      ->setViewerId($this->getUser()->getMemberId());
+    $viewerId = $this->getUser()->getMemberId();
+
+    $conn = Doctrine_Core::getTable('ActivityData')->getConnection();
+
+    $query = 'SELECT a.id, body, uri, in_reply_to_activity_id, source, source_uri, a.created_at,'
+           . '  m.id AS member_id, m.name,'
+           . '  mr.is_friend, mr.is_access_block'
+           . ' FROM activity_data a'
+           . ' LEFT JOIN member m ON m.id = a.member_id AND m.is_active <> 0'
+           . ' LEFT OUTER JOIN member_relationship mr ON mr.member_id_from = :viewerId AND mr.member_id_to = a.member_id';
+    $params = array('viewerId' => $viewerId);
 
     if (isset($request['target']))
     {
       if ('friend' === $request['target'])
       {
-        $builder->includeFriends($request['target_id'] ? $request['target_id'] : null);
+        $this->forward400('Not implemented.');
       }
-      elseif ('community' === $request['target'])
+      elseif ('community' === $target['community'])
       {
-        $this->forward400Unless($request['target_id'], 'target_id parameter not specified.');
-        $builder
-          ->includeSelf()
-          ->includeFriends()
-          ->includeSns()
-          ->setCommunityId($request['target_id']);
+        $this->forward400('Not implemented.');
       }
       else
       {
@@ -46,54 +50,77 @@ class activityActions extends opJsonApiActions
     {
       if (isset($request['member_id']))
       {
-        $builder->includeMember($request['member_id']);
+        $this->forward400('Not implemented.');
       }
       else
       {
-        $builder
-          ->includeSns()
-          ->includeFriends()
-          ->includeSelf();
       }
-    }
-
-    $query = $builder->buildQuery();
-
-    if (isset($request['keyword']))
-    {
-      $query->andWhereLike('body', $request['keyword']);
-    }
-
-    $globalAPILimit = sfConfig::get('op_json_api_limit', 20);
-    if (isset($request['count']) && (int)$request['count'] < $globalAPILimit)
-    {
-      $query->limit($request['count']);
-    }
-    else
-    {
-      $query->limit($globalAPILimit);
     }
 
     if (isset($request['max_id']))
     {
-      $query->addWhere('id <= ?', $request['max_id']);
+      $query .= '  AND id <= :maxId';
+      $params['maxId'] = $request['max_id'];
     }
 
     if (isset($request['since_id']))
     {
-      $query->addWhere('id > ?', $request['since_id']);
+      $query .= '  AND id > :sinceId';
+      $params['sinceId'] = $request['since_id'];
     }
 
     if (isset($request['activity_id']))
     {
-      $query->addWhere('id = ?', $request['activity_id']);
+      $query .= '  AND id = :id';
+      $params['id'] = $request['activity_id'];
     }
 
-    $this->activityData = $query
-      ->andWhere('in_reply_to_activity_id IS NULL')
-      ->execute();
+    if (isset($request['keyword']))
+    {
+      $query .= '  AND body LIKE bodyPattern';
+      $params['bodyPattern'] = '%'.$request['keyword'].'%';
+    }
 
-    $this->setTemplate('array');
+    $query .= '  AND in_reply_to_activity_id IS NULL';
+
+    $globalAPILimit = sfConfig::get('op_json_api_limit', 20);
+    if (isset($request['count']) && (int)$request['count'] < $globalAPILimit)
+    {
+      $query .= ' LIMIT '.((int)$request['count']);
+    }
+    else
+    {
+      $query .= ' LIMIT '.((int)$globalAPILimit);
+    }
+
+    $stmt = $conn->execute($query, $params);
+
+    $results = array();
+    while ($row = $stmt->fetch(Doctrine_Core::FETCH_ASSOC))
+    {
+      $activity = array(
+        'id' => $row['id'],
+        'member' => array(
+          'id' => $row['member_id'],
+          'name' => $row['name'],
+          'profile_url' => sfContext::getInstance()->getConfiguration()
+            ->generateAppUrl('pc_frontend', array('sf_route' => 'obj_member_profile', 'id' => $row['member_id']), true),
+          'friend' => '1' === $row['is_friend'],
+          'blocking' => '1' === $row['is_access_block'],
+          'self' => $row['member_id'] === $viewerId,
+        ),
+        'body' => $row['body'],
+        'body_html' => sfOutputEscaper::escape(sfConfig::get('sf_escaping_method'), $row['body']), // fixme
+        'uri' => $row['uri'],
+        'source' => $row['source'],
+        'source_uri' => $row['source_uri'],
+        'created_at' => date('r', strtotime($row['created_at'])),
+      );
+
+      $results[] = $activity;
+    }
+
+    return $this->renderJSON(array('status' => 'success', 'data' => $results));
   }
 
   public function executeMember(sfWebRequest $request)
