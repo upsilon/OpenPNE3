@@ -73,4 +73,13 @@ class pushActions extends opJsonApiActions
       $this->forward404('Request parameter id does not exist.');
     }
   }
+
+  public function executeReadAll(sfWebRequest $request)
+  {
+    $member = $this->getUser()->getMember();
+
+    $ret = opNotificationCenter::setReadAll($member);
+
+    return $this->renderJSON(array('status' => 'success'));
+  }
 }

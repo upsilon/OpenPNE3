@@ -93,6 +93,31 @@ class opNotificationCenter
     return $success;
   }
 
+  static public function setReadAll(Member $target)
+  {
+    $notificationObject = Doctrine::getTable('MemberConfig')
+      ->findOneByMemberIdAndName($target->getId(), 'notification_center');
+
+    if (!$notificationObject)
+    {
+      return true;
+    }
+
+    $notifications = unserialize($notificationObject->getValue());
+
+    foreach ($notifications as &$notification)
+    {
+      $notification['unread'] = false;
+    }
+    unset($notification);
+
+    $notificationObject->setValue(serialize($notifications));
+    $notificationObject->save();
+    $notificationObject->free(true);
+
+    return true;
+  }
+
   static public function getNotifications(Member $member = null)
   {
     if (is_null($member))

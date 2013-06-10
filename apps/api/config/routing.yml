@@ -128,3 +128,8 @@ push_read:
   url: /push/read.json
   param: { module: push, action: read, sf_format: json }
   requirements: { sf_method: [get] }
+
+push_read_all:
+  url: /push/read_all.json
+  param: { module: push, action: readAll, sf_format: json }
+  requirements: { sf_method: [get] }

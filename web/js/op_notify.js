@@ -35,6 +35,10 @@ $(document).ready(function(){
           }
           $('.nclink').pushLink();
         });
+
+        $.getJSON( openpne.apiBase + 'push/read_all.json', {apiKey: openpne.apiKey});
+        $('#nc_icon1, #nc_icon2, #nc_icon3').remove();
+
         is_read_flag = true;
       }
     }

@@ -12,6 +12,9 @@ $(document).ready(function(){
           $('.friend-accept', $pushHtml).friendLink({ buttonElement: '.friend-notify-button', ncfriendloadingElement: '#ncfriendloading', ncfriendresultmessageElement: '#ncfriendresultmessage', });
           $('.friend-reject', $pushHtml).friendUnlink({ buttonElement: '.friend-notify-button', ncfriendloadingElement: '#ncfriendloading', ncfriendresultmessageElement: '#ncfriendresultmessage', })
           $("#pushList").html($pushHtml);
+
+          $.getJSON( openpne.apiBase + 'push/read_all.json', {apiKey: openpne.apiKey});
+          $('#nc_count1, #nc_count2, #nc_count3').remove();
         }else{
           alert(json.message);
         }
