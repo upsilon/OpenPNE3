@@ -25,8 +25,10 @@
       {{if category=="link"}}
         {{if unread==false}}
         <?php echo __('%Friend% link request') ?>
+        <div style="font-size: 90%">${created_at}</div>
         {{else}}
         <?php echo __('Do you accept %friend% link request?') ?>
+        <div style="font-size: 90%">${created_at}</div>
         <div class="push_yesno">
           <button class="friend-accept">YES</button>
           <button class="friend-reject">NO</button>
@@ -36,6 +38,7 @@
         {{/if}}
       {{else}}
         ${body}
+        <div style="font-size: 90%">${created_at}</div>
       {{/if}}
       </div>
     </div>

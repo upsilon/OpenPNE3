@@ -37,6 +37,7 @@
           {{/if}}
           </div>
         </div>
+        <div class="row" style="font-size: 90%">${created_at}</div>
         {{if category=="link"}}
         <div class="row{{if unread==false}} hide{{/if}}">
             <button class="span2 btn btn-primary small friend-notify-button friend-accept"><?php echo __('Accept') ?></button>
