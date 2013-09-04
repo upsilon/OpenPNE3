@@ -40,4 +40,12 @@ class sfImageGeneratorIM extends sfImageGeneratorImageTransform
   {
     $this->transform->command['interlace'] = '-interlace none';
   }
+
+  protected function configureImageHandle()
+  {
+    if (sfConfig::get('op_imagemagick_strip_exif', false))
+    {
+      $this->transform->command['profile'] = '+profile exif';
+    }
+  }
 }

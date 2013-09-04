@@ -167,6 +167,12 @@ use_imagemagick: 0
 imagemagick_path: '/usr/bin/convert'
 #imagemagick_path: '"C:\Program Files\ImageMagick-6.2.5-Q16\convert"'
 
+# 画像から Exif 情報を除去する
+#   写真の撮影情報などが含まれている Exif 情報を画像から取り除きます。
+#   この設定は use_imagemagick が 2 の場合にのみ動作します。
+#   use_imagemagick が 0 または 1 の場合はこの設定に関係なく画像のメタデータは除去されます。
+imagemagick_strip_exif: false
+
 # 画像生成クラス設定 (Configuration of class for image-generating)
 #   この設定を有効にすると、 use_imagemagick の設定を無視して任意のクラスで画像を生成します。
 #   (If this configuration is enabled, OpenPNE generates image by using the specified class avoid "use_imagemagick")
