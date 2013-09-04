@@ -339,6 +339,10 @@ pre {
  * Notification Center
  *--------------------------------------------*/
 
+.ncbutton {
+  cursor: pointer;
+}
+
 #notificationCenter {
   width: 97px;
   padding: 40px 14px 0 14px;
