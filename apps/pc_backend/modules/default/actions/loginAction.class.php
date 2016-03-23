@@ -34,7 +34,7 @@ class loginAction extends sfAction
       if ($this->form->isValid())
       {
         $this->getUser()->login($this->form->getValue('adminUser')->getId());
-        $this->redirect('default/top');
+        $this->redirect($this->form->getValue('next_uri'));
       }
       return sfView::ERROR;
     }

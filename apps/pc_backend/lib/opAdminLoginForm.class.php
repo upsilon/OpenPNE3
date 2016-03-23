@@ -22,11 +22,13 @@ class opAdminLoginForm extends sfForm
     $this->setWidgets(array(
       'username' => new sfWidgetFormInput(),
       'password' => new sfWidgetFormInputPassword(),
+      'next_uri' => new opWidgetFormInputHiddenNextUri(),
     ));
 
     $this->setValidators(array(
       'username' => new sfValidatorString(array('max_length' => 64, 'trim' => true)),
       'password' => new sfValidatorString(array('max_length' => 40, 'trim' => true)),
+      'next_uri' => new opValidatorNextUri(array('logout_uri' => 'default/logout')),
     ));
 
     $this->widgetSchema->setNameFormat('admin_user[%s]');

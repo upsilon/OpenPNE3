@@ -1,0 +1,28 @@
+language: php
+
+php:
+  - 5.2.17
+  - 5.3.29
+  - 5.4.45
+  - 5.5
+  - 5.6
+  - 7.0
+  - hhvm
+
+matrix:
+  allow_failures:
+    - php: 7.0
+    - php: hhvm
+
+services:
+  - mysql
+
+install:
+  - cp config/ProjectConfiguration.class.php{.sample,}
+  - cp config/OpenPNE.yml{.sample,}
+  - echo -e "mysql\nroot\n\nlocalhost\n\nopenpne\n\ny\n" | ./symfony openpne:install
+  - ./symfony opPlugin:install opCommunityTopicPlugin
+  - ./symfony openpne:migrate --target=opCommunityTopicPlugin --no-update-plugin
+
+script:
+  - exit 0
