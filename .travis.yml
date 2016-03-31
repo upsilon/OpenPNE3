@@ -25,4 +25,4 @@ install:
   - ./symfony openpne:migrate --target=opCommunityTopicPlugin --no-update-plugin
 
 script:
-  - exit 0
+  - php test/functional/basicFunctionsTest.php

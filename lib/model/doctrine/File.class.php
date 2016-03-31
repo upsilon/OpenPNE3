@@ -100,7 +100,7 @@ class File extends BaseFile
   private function setOrient()
   {
       $type = $this->getType();
-      if ('image/jpeg' === $type)
+      if ('image/jpeg' === $type && sfConfig::get('sf_environment') !== 'test')
       {
         $exif = $this->readOrientation();
         $ei = $this->createOrientedImage($exif);
